@@ -10,6 +10,7 @@ import game.hud.HUD;
 import game.objects.ID;
 import game.objects.enemy.BasicEnemy;
 import game.objects.player.Player;
+import game.objects.items.Items;
 import game.objects.structure.Block;
 import game.objects.structure.InvisibleBlock;
 import game.objects.structure.Lava;
@@ -46,7 +47,10 @@ public class Game extends Canvas implements Runnable{
 	//private Camera camera;
 	private GameScreen gameScreen;
 	private SpriteSheet ss;
+	private SpriteSheet is;
 	private BufferedImage spriteSheet = null;
+	private BufferedImage itemSheet = null;
+
 	private BufferedImage floor = null;
 	private BufferedImage level = null;
 	private static boolean start = false;
@@ -68,7 +72,7 @@ public class Game extends Canvas implements Runnable{
 		//new Window(WIDTH, HEIGHT, "Dungeon Crawler", this);
 		BufferedImageLoader loader = new BufferedImageLoader();
 		level = loader.loadImage("/Test5.png");
-		spriteSheet = loader.loadImage("/BlocksNew1.png");
+		spriteSheet = loader.loadImage("/BlocksNew.png");
 		ss = new SpriteSheet(spriteSheet);
 		floor = ss.grabImage(1, 1, 32, 32);
 		loadLevel(level);
@@ -269,6 +273,7 @@ public class Game extends Canvas implements Runnable{
 				//Code between lines controls what objects are rendered into the game.
 				/////////////////////////////////////////////////////////
 				//Load Level First then enemy and player
+				
 				if(red == 0 && green == 0 && blue == 255) {
 					handler.addObject(new Player(xx*32, yy*32 + 96, ID.Player,ss, handler));
 				}
@@ -279,7 +284,7 @@ public class Game extends Canvas implements Runnable{
 					handler.addObject(new Lava(xx*32, yy*32 + 96, ID.Lava,ss));
 				}
 				if(red == 0 && green == 255 && blue == 0) {
-					handler.addObject(new BasicEnemy(xx*32, yy*32 + 96, ID.Enemy,ss,handler));
+					handler.addObject(new Items(xx*32, yy*32 + 96, ID.Items,ss));
 				}
 				if(red == 255 && green == 255 && blue == 255) {
 					handler.addObject(new InvisibleBlock(xx*32, yy*32 + 96, ID.Block,ss));

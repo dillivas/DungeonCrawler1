@@ -113,6 +113,7 @@ public class GameScreen{
 					Game.setRestart(true);
 				}
 			}
+			g.drawImage(Render.getHealthPotion(),0,0,32,32, null);
 		}
 
 		/**

@@ -2,11 +2,14 @@ package game.objects.player;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import game.engine.Handler;
 import game.hud.HUD;
 import game.objects.GameObject;
 import game.objects.ID;
+import game.objects.items.Items;
 import game.render.Render;
 import game.render.SpriteSheet;
 
@@ -20,7 +23,7 @@ public class Player extends GameObject {
 
 	//Store handler for later use
 	private Handler handler;
-	
+	private ArrayList<Items> pouch;
 	//Store last key entered by user
 	//Used to show character direction to face
 	private char lastKey = 'd';
@@ -39,6 +42,7 @@ public class Player extends GameObject {
 	public Player(int x, int y, ID id, SpriteSheet ss, Handler handler) {
 		super(x, y, id, ss);
 		this.handler = handler;
+		pouch = new ArrayList<Items>();
 	}
 
 	/**
@@ -89,6 +93,16 @@ public class Player extends GameObject {
 
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Lava)) {
 					HUD.setHealth(HUD.getHealth() - 1);
+				}
+			}
+			if(tempObject.getID() == ID.Items) {
+
+				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Items)) {
+					if(Items.getIndex() == 7) {
+					
+					}
+					System.out.println(pouch);
+					handler.removeObject(tempObject);
 				}
 			}
 		}

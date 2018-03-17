@@ -12,5 +12,6 @@ public enum ID {
 	 Enemy(),
 	 Attack(),
 	 Lava(),
-	 Menu();
+	 Menu(), 
+	 Items();
 }

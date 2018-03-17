@@ -51,7 +51,37 @@ public class Render {
 	private static BufferedImage pauseRestart;
 	private static BufferedImage startQuit;
 	private static BufferedImage gameStart;
-
+	
+	private static BufferedImage healthPotion;
+	private static BufferedImage manaPotion;	
+	private static BufferedImage invinciblePotion;
+	
+	/**
+	 * @return the healthPotion
+	 */
+	public static BufferedImage getHealthPotion() {
+		return healthPotion;
+	}
+	
+	public static void setHealthPotion(BufferedImage healthPotion) {
+		Render.healthPotion = healthPotion;
+	}
+	
+	public static BufferedImage getInvinciblePotion() {
+		return invinciblePotion;
+	}
+	
+	public static void setInvinciblePotion(BufferedImage healthPotion) {
+		Render.invinciblePotion = healthPotion;
+	}
+	public static BufferedImage getManaPotion() {
+		return manaPotion;
+	}
+	
+	public static void setManaPotion(BufferedImage healthPotion) {
+		Render.manaPotion = healthPotion;
+	}
+	
 	/**
 	 * @return the playerStop
 	 */
@@ -473,6 +503,12 @@ public class Render {
 			ghostImage = ImageIO.read(new File("src/Images/ghost.gif"));
 
 			fireball = ImageIO.read(new File("src/Images/fireball.gif"));
+			healthPotion = ImageIO.read(new File("src/itemImages/healthPotion.PNG"));
+			manaPotion = ImageIO.read(new File("src/itemImages/manaPotion.png"));
+			invinciblePotion = ImageIO.read(new File("src/itemImages/invincibilityPotion.png"));
+
+
+
 
 		} catch (IOException e) {
 			//If not found print error message
