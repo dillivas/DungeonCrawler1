@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import game.controls.KeyInput;
 import game.engine.Game;
 import game.hud.HUD;
+import game.objects.player.Player;
 
 /**
  * This Function Controls the pause and start screen of the game.
@@ -18,7 +19,7 @@ public class GameScreen{
 	//private Handler handler;
 	private char lastKey = 'd';
 	private int count = 0;
-	
+
 	/**
 	 * get lastKey
 	 * @return lastKey pressed
@@ -26,7 +27,7 @@ public class GameScreen{
 	public int getCount() {
 		return count;
 	}
-	
+
 	/**
 	 * set lastKey
 	 * @param count store
@@ -34,7 +35,7 @@ public class GameScreen{
 	public void setCount(int count) {
 		this.count = count;
 	}
-	
+
 	/**
 	 * get lastKey
 	 * @return lastKey pressed
@@ -42,7 +43,7 @@ public class GameScreen{
 	public char getLastKey() {
 		return lastKey;
 	}
-	
+
 	/**
 	 * set lastKey
 	 * @param lastKey pressed
@@ -75,7 +76,7 @@ public class GameScreen{
 			}
 			//Image of quite selected
 			if (KeyInput.getDown() == true){
-			    g.drawImage(Render.getStartQuit(),0,0,Game.WIDTH,Game.HEIGHT, null);
+				g.drawImage(Render.getStartQuit(),0,0,Game.WIDTH,Game.HEIGHT, null);
 				if(KeyInput.getSpace() == true) {
 					System.exit(1);		
 				}
@@ -113,7 +114,16 @@ public class GameScreen{
 					Game.setRestart(true);
 				}
 			}
-			g.drawImage(Render.getHealthPotion(),0,0,32,32, null);
+			for (int k = 0; k <= Player.getPouch().size()-1; k++) {
+				g.drawImage(Render.getHealthPotion(),0,0,32,32, null);
+				if (Player.getPouch().size() == 0) {
+					System.out.print("Empty list");
+				}
+				else {
+					System.out.println(Player.getPouch().get(k));
+				}
+			}
+			//g.drawImage(Render.getHealthPotion(),0,0,32,32, null);
 		}
 
 		/**

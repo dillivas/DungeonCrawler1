@@ -23,11 +23,11 @@ public class Player extends GameObject {
 
 	//Store handler for later use
 	private Handler handler;
-	private ArrayList<Items> pouch;
+	private static ArrayList<String> pouch;
 	//Store last key entered by user
 	//Used to show character direction to face
 	private char lastKey = 'd';
-	
+
 	//Store pressLength
 	private int pressLength = 4;
 
@@ -42,7 +42,7 @@ public class Player extends GameObject {
 	public Player(int x, int y, ID id, SpriteSheet ss, Handler handler) {
 		super(x, y, id, ss);
 		this.handler = handler;
-		pouch = new ArrayList<Items>();
+		pouch = new ArrayList<String>();
 	}
 
 	/**
@@ -51,28 +51,28 @@ public class Player extends GameObject {
 	public void tick() {
 		setX(getX() + getSpeedX());
 		setY(getY() + getSpeedY());
-		
+
 		//Call collision function
 		collision();
-		
+
 		//Player Movement
 		if(handler.getUp()) setSpeedY(-3);
 		else if(!handler.getDown()) setSpeedY(0);
-		
+
 		if(handler.getDown()) setSpeedY(3);
 		else if(!handler.getUp()) setSpeedY(0);
-		
+
 		if(handler.getRight()) setSpeedX(3);
 		else if(!handler.getLeft()) setSpeedX(0);
-		
+
 		if(handler.getLeft()) setSpeedX(-3);
 		else if(!handler.getRight()) setSpeedX(0);
 	}
-	
-   /**
-	* This function controls the behavior of this object when it collides with another object.
-	* Collisions use the objects rectangle as a its hitbox.
-	*/
+
+	/**
+	 * This function controls the behavior of this object when it collides with another object.
+	 * Collisions use the objects rectangle as a its hitbox.
+	 */
 	private void collision() {
 		for(int i = 0;i < handler.getObject().size(); i++) {
 			GameObject tempObject = handler.getObject().get(i);
@@ -82,7 +82,7 @@ public class Player extends GameObject {
 					setY(getY() + getSpeedY() * -1);
 				}
 			}
-			
+
 			if(tempObject.getID() == ID.Enemy) {
 
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Enemy)) {
@@ -98,16 +98,21 @@ public class Player extends GameObject {
 			if(tempObject.getID() == ID.Items) {
 
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Items)) {
-					if(Items.getIndex() == 7) {
+					Items item = (Items) tempObject;	
+					System.out.println(item.getItemType());
+					pouch.add(item.getItemType());
+					//System.out.println(item.getBounds());
 					
-					}
-					System.out.println(pouch);
 					handler.removeObject(tempObject);
 				}
 			}
 		}
 	}
 	
+	public static ArrayList<String> getPouch() {
+		return pouch;
+	}
+
 	/**
 	 * This is the Players hit box.
 	 * @return Rectangle returns hit box
@@ -133,8 +138,8 @@ public class Player extends GameObject {
 		if(handler.getStop() && lastKey=='d') {
 			g.drawImage(Render.getPlayerRightStanding(),getX(),getY(),32,32, null);
 		}
-		
-		
+
+
 		if(handler.getUp() == true) {
 			lastKey='w';
 			pressLength++;
@@ -144,7 +149,7 @@ public class Player extends GameObject {
 			else {
 				g.drawImage(Render.getPlayerForwardWalk2(),getX(),getY(),32,32, null);
 			}
-				
+
 		}
 		if(handler.getDown() == true) {
 			lastKey='s';
@@ -156,7 +161,7 @@ public class Player extends GameObject {
 				g.drawImage(Render.getPlayerDownWalk2(),getX(),getY(),32,32, null);
 			}
 		}
-		
+
 		if(handler.getLeft() == true) {
 			lastKey='a';
 			pressLength++;
@@ -167,7 +172,7 @@ public class Player extends GameObject {
 				g.drawImage(Render.getPlayerLeftWalk2(),getX(),getY(),32,32, null);
 			}
 		}
-		
+
 		if(handler.getRight() == true) {
 			lastKey='d';
 			pressLength++;

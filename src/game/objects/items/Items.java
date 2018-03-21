@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -28,9 +29,9 @@ public class Items extends GameObject{
 	private BufferedImage randomItem;
 	private Random rand;
 	private static int q = 0;
+	private String potionType;
 
-
-	Hashtable<Integer, BufferedImage> box = new Hashtable<Integer, BufferedImage>();
+	static HashMap<Rectangle, String> box = new HashMap<Rectangle, String>();
 
 	/**
 	 * Lava constructor
@@ -40,10 +41,26 @@ public class Items extends GameObject{
 	 * @param ss sprite image of object
 	 */
 
+	public String getItemType() {
+		return potionType;
+	}
 	public int setIndex() {
 		//q = Math.random();
 		rand = new Random();
 		q = rand.nextInt(3)+6;
+		
+		switch(q) {
+			case 6:
+				this.potionType = "invinciblity";
+				break;
+			case 7:
+				this.potionType = "healthPotion";
+				break;
+			case 8:
+				this.potionType = "manaPotion";
+				break;
+		}
+		
 		System.out.println(q);
 		return q;
 	}
@@ -54,10 +71,12 @@ public class Items extends GameObject{
 		super(x, y, id, ss);
 		setIndex();
 		//random spawn of value based upon first value starting at 7-9 curently
-		healthPotion = ss.grabImage(7,1,32,32);
-		manaPotion = ss.grabImage(8,1,32,32);
-		invincibilityPotion = ss.grabImage(6,1,32,32);
-		itemBox();
+		//healthPotion = ss.grabImage(7,1,32,32);
+		//manaPotion = ss.grabImage(8,1,32,32);
+		//invincibilityPotion = ss.grabImage(6,1,32,32);
+		//itemBox();
+		//System.out.println(box.keys());
+		//System.out.println(box.get(getBounds()));
 		randomItem = ss.grabImage(getIndex(),1,32,32); 
 	}
 
@@ -84,25 +103,30 @@ public class Items extends GameObject{
 	 */
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(getX(),getY(),16,16);
+		return new Rectangle(getX(),getY(),32,32);
+	}
+	
+	public static HashMap<Rectangle, String> getBox() {
+		return box;
 	}
 	
 	public void itemBox() {
-		Hashtable<Integer, BufferedImage> box = new Hashtable<Integer, BufferedImage>();
+		//Hashtable<Rectangle, BufferedImage> box = new Hashtable<Rectangle, BufferedImage>();
 		if (q == 6) {
-			box.put(0, invincibilityPotion);
-			System.out.println("invincible");
+			box.put(getBounds(), "invincibilityPotion");
+			//System.out.println(getBounds());
 		}
 		if (q == 7) {
-			box.put(0, healthPotion);
-			System.out.println("health");
+			box.put(getBounds(), "healthPotion");
+			//System.out.println(getBounds());
 
 		}
 		if (q == 8) {
-			box.put(0, manaPotion);
-			System.out.println("mana");
+			box.put(getBounds(), "manaPotion");
+			//System.out.println(getBounds());
 		}
-			
+		
+		//System.out.println(box.keys());
 		}
 		//box.add(healthP);s
 		
