@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -23,12 +24,13 @@ public class Items extends GameObject{
 	//Variable holds image of item object to render
 	private BufferedImage healthPotion;
 	private BufferedImage manaPotion;
+	private BufferedImage invincibilityPotion;
 	private BufferedImage randomItem;
 	private Random rand;
 	private static int q = 0;
 
 
-	ArrayList<String> box = new ArrayList<String>();
+	Hashtable<Integer, BufferedImage> box = new Hashtable<Integer, BufferedImage>();
 
 	/**
 	 * Lava constructor
@@ -41,7 +43,7 @@ public class Items extends GameObject{
 	public int setIndex() {
 		//q = Math.random();
 		rand = new Random();
-		q = rand.nextInt(3)+7;
+		q = rand.nextInt(3)+6;
 		System.out.println(q);
 		return q;
 	}
@@ -50,10 +52,13 @@ public class Items extends GameObject{
 	}
 	public Items(int x, int y, ID id, SpriteSheet ss) {
 		super(x, y, id, ss);
+		setIndex();
 		//random spawn of value based upon first value starting at 7-9 curently
-		//healthPotion = ss.grabImage(7,1,32,32);
-		//manaPotion = ss.grabImage(8,1,32,32);
-		randomItem = ss.grabImage(setIndex(),1,32,32); 
+		healthPotion = ss.grabImage(7,1,32,32);
+		manaPotion = ss.grabImage(8,1,32,32);
+		invincibilityPotion = ss.grabImage(6,1,32,32);
+		itemBox();
+		randomItem = ss.grabImage(getIndex(),1,32,32); 
 	}
 
 
@@ -83,10 +88,23 @@ public class Items extends GameObject{
 	}
 	
 	public void itemBox() {
-		ArrayList<String> box = new ArrayList<String>();
+		Hashtable<Integer, BufferedImage> box = new Hashtable<Integer, BufferedImage>();
+		if (q == 6) {
+			box.put(0, invincibilityPotion);
+			System.out.println("invincible");
+		}
+		if (q == 7) {
+			box.put(0, healthPotion);
+			System.out.println("health");
+
+		}
+		if (q == 8) {
+			box.put(0, manaPotion);
+			System.out.println("mana");
+		}
 			
 		}
-		//box.add(healthP);
+		//box.add(healthP);s
 		
 	}
 	//create an array for all items

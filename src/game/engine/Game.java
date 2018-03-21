@@ -102,7 +102,7 @@ public class Game extends Canvas implements Runnable{
 		//new Window(WIDTH, HEIGHT, "Dungeon Crawler", this);
 		BufferedImageLoader loader = new BufferedImageLoader();
 		level = loader.loadImage("/Test5.png");
-		spriteSheet = loader.loadImage("/BlocksNew1.png");
+		spriteSheet = loader.loadImage("/BlocksNew.png");
 		ss = new SpriteSheet(spriteSheet);
 		floor = ss.grabImage(1, 1, 32, 32);
 		loadLevel(level);
@@ -285,6 +285,9 @@ public class Game extends Canvas implements Runnable{
 				}
 				if(red == 0 && green == 255 && blue == 0) {
 					handler.addObject(new Items(xx*32, yy*32 + 96, ID.Items,ss));
+				}
+				if(red == 190 && green == 60 && blue == 190) {
+					handler.addObject(new BasicEnemy(xx*32, yy*32 + 96, ID.Enemy,ss, handler));
 				}
 				if(red == 255 && green == 255 && blue == 255) {
 					handler.addObject(new InvisibleBlock(xx*32, yy*32 + 96, ID.Block,ss));
