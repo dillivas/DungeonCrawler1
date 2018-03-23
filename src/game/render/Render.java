@@ -55,10 +55,21 @@ public class Render {
 	private static BufferedImage healthPotion;
 	private static BufferedImage manaPotion;	
 	private static BufferedImage invinciblePotion;
+	private static BufferedImage border;
+
 	
 	/**
 	 * @return the healthPotion
 	 */
+	
+	public static BufferedImage getBorder() {
+		return border;
+	}
+	
+	public static void setBorder(BufferedImage border) {
+		Render.border = border;
+	}
+	
 	public static BufferedImage getHealthPotion() {
 		return healthPotion;
 	}
@@ -492,8 +503,8 @@ public class Render {
 			playerDownStanding = ImageIO.read(new File("src/player_images/down_stand.gif"));
 			playerUpStanding = ImageIO.read(new File("src/player_images/forward_stand.gif"));
 			
-			pauseQuit = ImageIO.read(new File("src/Images/QuitPause.PNG"));
-			pauseRestart = ImageIO.read(new File("src/Images/RestartPause.PNG"));
+			pauseQuit = ImageIO.read(new File("src/Images/pQuit.PNG"));//QuitPause
+			pauseRestart = ImageIO.read(new File("src/Images/pRestart.PNG"));//RestartPause
 			gameRestart = ImageIO.read(new File("src/Images/RestartGame.PNG"));
 			gameQuit = ImageIO.read(new File("src/Images/QuitGame.PNG"));
 			gameStart = ImageIO.read(new File("src/Images/GameStart.PNG"));
@@ -506,6 +517,9 @@ public class Render {
 			healthPotion = ImageIO.read(new File("src/itemImages/healthPotion.PNG"));
 			manaPotion = ImageIO.read(new File("src/itemImages/manaPotion.png"));
 			invinciblePotion = ImageIO.read(new File("src/itemImages/invincibilityPotion.png"));
+			
+			border = ImageIO.read(new File("src/Images/border.png"));
+
 
 
 

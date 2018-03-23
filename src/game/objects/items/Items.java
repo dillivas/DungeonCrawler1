@@ -71,9 +71,6 @@ public class Items extends GameObject{
 		super(x, y, id, ss);
 		setIndex();
 		//random spawn of value based upon first value starting at 7-9 curently
-		//healthPotion = ss.grabImage(7,1,32,32);
-		//manaPotion = ss.grabImage(8,1,32,32);
-		//invincibilityPotion = ss.grabImage(6,1,32,32);
 		//itemBox();
 		//System.out.println(box.keys());
 		//System.out.println(box.get(getBounds()));
@@ -108,6 +105,12 @@ public class Items extends GameObject{
 	
 	public static HashMap<Rectangle, String> getBox() {
 		return box;
+	}
+	
+	public void loadImage(SpriteSheet ss) {
+		healthPotion = ss.grabImage(7,1,32,32);
+		manaPotion = ss.grabImage(8,1,32,32);
+		invincibilityPotion = ss.grabImage(6,1,32,32);
 	}
 	
 	public void itemBox() {

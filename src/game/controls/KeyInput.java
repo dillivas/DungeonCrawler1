@@ -29,6 +29,8 @@ public class KeyInput extends KeyAdapter{
 	private static boolean stop = false;
 	private static boolean up = false;
 	private static boolean down = false;
+	private static boolean left = false;
+	private static boolean right = false;
 	private static boolean space = false;
 	private int count = 0;
 
@@ -115,7 +117,36 @@ public class KeyInput extends KeyAdapter{
 	public static void setDown(boolean down) {
 		KeyInput.down = down;
 	}
+	
+	/**
+	 * @return the left
+	 */
+	public static boolean getLeft() {
+		return left;
+	}
 
+	/**
+	 * @param left the left to set
+	 */
+	public static void setLeft(boolean left) {
+		KeyInput.left = left;
+	}
+	
+	/**
+	 * @return the right
+	 */
+	public static boolean getRight() {
+		return right;
+	}
+
+	/**
+	 * @param right the right to set
+	 */
+	public static void setRight(boolean right) {
+		KeyInput.right = right;
+	}
+
+	
 	/**
 	 * @return the space
 	 */
@@ -194,10 +225,14 @@ public class KeyInput extends KeyAdapter{
 				if(key == KeyEvent.VK_A) {
 					handler.setLeft(true);
 					handler.setStop(false);
+					left = true;
+					right = false;
 				}
 				if(key == KeyEvent.VK_D) {
 					handler.setRight(true);
 					handler.setStop(false);
+					right = true;
+					left = false;
 				}
 				if(key == KeyEvent.VK_UP) {
 					handler.setUpAim(true);
