@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import game.controls.KeyInput;
 import game.engine.Game;
 import game.hud.HUD;
+import game.objects.items.ItemSpecs;
+//import game.objects.items.ItemSpecs;
+import game.objects.items.Items;
 import game.objects.player.Player;
 
 /**
@@ -76,12 +79,12 @@ public class GameScreen{
 			if(KeyInput.getDown()== true) {
 				KeyInput.setDown(false);
 				if (start < 1)
-				start++;
+					start++;
 			}
 			if(KeyInput.getUp()== true) {
 				KeyInput.setUp(false);
 				if (start > 0)
-				start--;
+					start--;
 			}
 			switch(start) {
 			case 0:
@@ -170,6 +173,12 @@ public class GameScreen{
 		case 2:
 			g.drawImage(Render.getPauseItem(),0,0,Game.WIDTH-5,Game.HEIGHT-30, null);
 			g.drawImage(Render.getBorder(),BORDER_X + (61*total),BORDER_Y,BORDER_WIDTH,BORDER_HEIGHT, null);
+			if(KeyInput.getSpace() == true) { 
+				ItemSpecs.getSpecs(Player.getPouch().get(total));
+				g.drawImage(Items.getImage(Player.getPouch().get(total)),0,0,0,0, null);
+
+			}
+
 			break;
 
 		}
@@ -177,10 +186,24 @@ public class GameScreen{
 
 			if (Player.getPouch().size() == 0) {
 				System.out.print("Empty list");
-			}
+			} 
 			else {
-				g.drawImage(Render.getHealthPotion(),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
-				System.out.println(Player.getPouch().get(k));
+				g.drawImage(Items.getImage(Player.getPouch().get(k)),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
+				//System.out.println(Player.getPouch().get(k));
+				/*switch(Player.getPouch().get(k)) {
+				case "healthPotion":
+					g.drawImage(Render.getHealthPotion(),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
+
+					break;
+				case "invinsiblity":
+					g.drawImage(Render.getHealthPotion(),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
+
+					break;
+				case "manaPotion":
+					g.drawImage(Render.getHealthPotion(),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
+
+					break;
+				}*/
 			}
 		}
 
