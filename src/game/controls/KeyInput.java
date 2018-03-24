@@ -7,6 +7,7 @@ import game.engine.Handler;
 import game.objects.GameObject;
 import game.objects.ID;
 import game.objects.attack.Fireball;
+import game.render.GameScreen;
 import game.render.SpriteSheet;
 
 /**
@@ -200,11 +201,16 @@ public class KeyInput extends KeyAdapter{
 			if(tempObject.getID() == ID.Player) {
 				
 				if(key == KeyEvent.VK_Q) {
+					setUp(false);
+					setDown(false);
+					GameScreen.setC(0);
 					count++;
 					if (count % 2 ==0){
 						handler.setPause(false);
-						pause = false;
+						pause = false;						
 					}else {
+						//GameScreen.setC(-1);
+
 						handler.setPause(true);
 						pause = true;
 					}

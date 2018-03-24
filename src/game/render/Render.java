@@ -44,6 +44,7 @@ public class Render {
 	private static BufferedImage ghostImage;
 	
 	private static BufferedImage fireball;
+	private static BufferedImage instructions;
 	private static BufferedImage pauseScreen;
 	private static BufferedImage gameQuit;
 	private static BufferedImage gameRestart;
@@ -51,6 +52,8 @@ public class Render {
 	private static BufferedImage pauseRestart;
 	private static BufferedImage startQuit;
 	private static BufferedImage gameStart;
+	private static BufferedImage pauseItem;
+
 	
 	private static BufferedImage healthPotion;
 	private static BufferedImage manaPotion;	
@@ -372,6 +375,21 @@ public class Render {
 	public static void setFireball(BufferedImage fireball) {
 		Render.fireball = fireball;
 	}
+	
+	
+	/**
+	 * @return the instructions
+	 */
+	public static BufferedImage getInstructions() {
+		return instructions;
+	}
+
+	/**
+	 * @param pauseScreen the pauseScreen to set
+	 */
+	public static void setInstructions(BufferedImage instructions) {
+		Render.instructions = instructions;
+	}
 
 	/**
 	 * @return the pauseScreen
@@ -387,6 +405,21 @@ public class Render {
 		Render.pauseScreen = pauseScreen;
 	}
 
+	
+	/**
+	 * @return the pauseItem
+	 */
+	public static BufferedImage getPauseItem() {
+		return pauseItem;
+	}
+
+	/**
+	 * @param pauseItem the pauseItem to set
+	 */
+	public static void setPauseItem(BufferedImage pauseItem) {
+		Render.pauseItem = pauseItem;
+	}
+	
 	/**
 	 * @return the gameQuit
 	 */
@@ -503,9 +536,13 @@ public class Render {
 			playerDownStanding = ImageIO.read(new File("src/player_images/down_stand.gif"));
 			playerUpStanding = ImageIO.read(new File("src/player_images/forward_stand.gif"));
 			
+			instructions = ImageIO.read(new File("src/Images/cutscene.PNG"));//QuitPause
+
 			pauseQuit = ImageIO.read(new File("src/Images/pQuit.PNG"));//QuitPause
 			pauseRestart = ImageIO.read(new File("src/Images/pRestart.PNG"));//RestartPause
 			gameRestart = ImageIO.read(new File("src/Images/RestartGame.PNG"));
+			pauseItem = ImageIO.read(new File("src/Images/pItem.PNG"));//QuitPause
+
 			gameQuit = ImageIO.read(new File("src/Images/QuitGame.PNG"));
 			gameStart = ImageIO.read(new File("src/Images/GameStart.PNG"));
 			startQuit = ImageIO.read(new File("src/Images/StartQuit.PNG"));

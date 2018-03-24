@@ -57,7 +57,6 @@ public class Game extends Canvas implements Runnable{
 	private static boolean restart = true;
 
 
-
 	/**
 	 * Game object constructed
 	 */
@@ -124,6 +123,7 @@ public class Game extends Canvas implements Runnable{
 			Game.start = false;
 			restart = false;
 			KeyInput.setPause(false);
+			
 			game.restart();
 		}
 	}
@@ -222,7 +222,6 @@ public class Game extends Canvas implements Runnable{
 				g.drawImage(floor, xx, yy, null);
 			}
 		}
-		
 		handler.render(g);
 		
 		//g2d.translate(camera.getX(), camera.getY());	//end of cam influence
