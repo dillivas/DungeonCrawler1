@@ -28,7 +28,7 @@ public class Lava extends GameObject{
 	 */
 	public Lava(int x, int y, ID id, SpriteSheet ss) {
 		super(x, y, id, ss);
-		lavaImage = ss.grabImage(5,1,32,32);
+		lavaImage = ss.grabImage(4,1,32,32);
 	}
 
 	/**

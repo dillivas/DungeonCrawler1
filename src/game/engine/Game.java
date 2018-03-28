@@ -107,6 +107,7 @@ public class Game extends Canvas implements Runnable{
 		loadLevel(level);
 		hud = new HUD();
 		HUD.setHealth(100);
+		HUD.setMana(100);
 		gameScreen = new GameScreen();
 		this.addKeyListener(new KeyInput(handler, ss));
 
@@ -291,7 +292,6 @@ public class Game extends Canvas implements Runnable{
 				if(red == 255 && green == 255 && blue == 255) {
 					handler.addObject(new InvisibleBlock(xx*32, yy*32 + 96, ID.Block,ss));
 				}
-				
 				//////////////////////////////////////////////////////////
 				
 			}

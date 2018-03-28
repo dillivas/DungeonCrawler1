@@ -11,22 +11,24 @@ import java.util.stream.IntStream;
 
 import game.objects.GameObject;
 import game.objects.ID;
+import game.objects.player.Player;
 import game.render.Render;
 import game.render.SpriteSheet;
 
 /**
  * Class controls Lava object
- * @author William
+ * @author Sierra
  * date 2/27/2018
  * class Lava
  */
 public class Items extends GameObject{
 
 	//Variable holds image of item object to render
-	protected static BufferedImage healthPotion;
-	protected static BufferedImage manaPotion;
-	protected static BufferedImage invincibilityPotion;
-	private BufferedImage randomItem;
+	private static BufferedImage healthPotion;
+	private static BufferedImage manaPotion;
+	private static BufferedImage invincibilityPotion;
+	private BufferedImage chest;
+	private BufferedImage openChest;
 	private Random rand;
 	private static int q = 0;
 	private String potionType;
@@ -47,17 +49,17 @@ public class Items extends GameObject{
 	public int setIndex() {
 		//q = Math.random();
 		rand = new Random();
-		q = rand.nextInt(3)+6;
+		q = rand.nextInt(3)+7;
 
 		switch(q) {
-		case 6:
-			this.potionType = "invincibility";
-			break;
 		case 7:
 			this.potionType = "healthPotion";
 			break;
 		case 8:
 			this.potionType = "manaPotion";
+			break;
+		case 9:
+			this.potionType = "invincibility";
 			break;
 		}
 
@@ -75,7 +77,9 @@ public class Items extends GameObject{
 		//System.out.println(box.keys());
 		//System.out.println(box.get(getBounds()));
 		loadImage(ss);
-		randomItem = ss.grabImage(getIndex(),1,32,32); 
+		chest = ss.grabImage(5,1,32,32); 
+		openChest = ss.grabImage(6,1,32,32); 
+
 	}
 
 
@@ -93,8 +97,14 @@ public class Items extends GameObject{
 	 */
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(randomItem, getX(), getY(),32,32,null);
+		g.drawImage(chest, getX(), getY(),32,32,null);
 
+		if (Player.getDisplay() == true) {
+			for (int a = 0; a< 10; a++) {
+				g.drawImage(openChest, getX(), getY(),32,32,null);
+			}
+			Player.setDisplay(false);
+		}
 	}
 
 	/**
@@ -111,8 +121,8 @@ public class Items extends GameObject{
 
 	public void loadImage(SpriteSheet ss) {
 		healthPotion = ss.grabImage(7,1,32,32);
-		manaPotion = ss.grabImage(8,1,32,32);
-		invincibilityPotion = ss.grabImage(6,1,32,32);
+		manaPotion = ss.grabImage(8,1,32,32); //
+		invincibilityPotion = ss.grabImage(9,1,32,32);
 	}
 
 	public static BufferedImage getImage(String s) {
@@ -130,25 +140,6 @@ public class Items extends GameObject{
 		}
 	}
 
-	public void itemBox() {
-		//Hashtable<Rectangle, BufferedImage> box = new Hashtable<Rectangle, BufferedImage>();
-		if (q == 6) {
-			box.put(getBounds(), "invincibilityPotion");
-			//System.out.println(getBounds());
-		}
-		if (q == 7) {
-			box.put(getBounds(), "healthPotion");
-			//System.out.println(getBounds());
-
-		}
-		if (q == 8) {
-			box.put(getBounds(), "manaPotion");
-			//System.out.println(getBounds());
-		}
-
-		//System.out.println(box.keys());
-	}
-	//box.add(healthP);s
 
 }
 //create an array for all items

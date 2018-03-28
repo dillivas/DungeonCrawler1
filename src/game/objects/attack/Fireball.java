@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import game.engine.Handler;
+import game.hud.HUD;
 import game.objects.GameObject;
 import game.objects.ID;
 import game.render.Render;

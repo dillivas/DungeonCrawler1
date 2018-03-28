@@ -8,9 +8,10 @@ import game.objects.ID;
 import game.render.SpriteSheet;
 
 public class ItemSpecs extends Items {
-	//private static BufferedImage healthPotion;
-	//private static BufferedImage manaPotion;
-	//private static BufferedImage invincibilityPotion;
+	private static int health;
+	private static int counter = 100000;
+	private static boolean invincible = false;
+
 
 	public ItemSpecs(int x, int y, ID id, SpriteSheet ss) {
 		super(x, y, id, ss);
@@ -32,9 +33,15 @@ public class ItemSpecs extends Items {
 		HUD.setHealth(100);
 	}
 	public static void manaPotion() {
-		HUD.setHealth(100);
+		HUD.setMana(100);
 	}
 	public static void invincibility() {
-		HUD.setHealth(100);
+		setInvincible(true);
+	}
+	private static void setInvincible(boolean b) {
+		invincible = b;
+	}
+	public static boolean getInvincible() {
+		return invincible;
 	}
 }

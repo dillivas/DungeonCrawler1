@@ -4,6 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import game.engine.Handler;
+import game.hud.HUD;
 import game.objects.GameObject;
 import game.objects.ID;
 import game.objects.attack.Fireball;
@@ -20,11 +21,11 @@ public class KeyInput extends KeyAdapter{
 
 	//Store handler for KeyInput use
 	private Handler handler;
-	
+
 	//Store sprite sheet.
 	//Not used Yet
 	private SpriteSheet ss;
-	
+
 	//Stores inputs for menu use
 	private static boolean pause = false;
 	private static boolean stop = false;
@@ -118,7 +119,7 @@ public class KeyInput extends KeyAdapter{
 	public static void setDown(boolean down) {
 		KeyInput.down = down;
 	}
-	
+
 	/**
 	 * @return the left
 	 */
@@ -132,7 +133,7 @@ public class KeyInput extends KeyAdapter{
 	public static void setLeft(boolean left) {
 		KeyInput.left = left;
 	}
-	
+
 	/**
 	 * @return the right
 	 */
@@ -147,7 +148,7 @@ public class KeyInput extends KeyAdapter{
 		KeyInput.right = right;
 	}
 
-	
+
 	/**
 	 * @return the space
 	 */
@@ -186,7 +187,7 @@ public class KeyInput extends KeyAdapter{
 		this.handler = handler;
 		this.ss = ss;
 	}
-	
+
 	/**
 	 * Make action happen based on key being pressed
 	 * @param e is a KeyEvent
@@ -199,7 +200,7 @@ public class KeyInput extends KeyAdapter{
 		for(int i = 0; i < handler.getObject().size(); i++) {
 			GameObject tempObject = handler.getObject().get(i);
 			if(tempObject.getID() == ID.Player) {
-				
+
 				if(key == KeyEvent.VK_Q) {
 					setUp(false);
 					setDown(false);
@@ -215,7 +216,7 @@ public class KeyInput extends KeyAdapter{
 						pause = true;
 					}
 				}
-				
+
 				if(key == KeyEvent.VK_W) {
 					handler.setUp(true);
 					handler.setStop(false);
@@ -242,7 +243,7 @@ public class KeyInput extends KeyAdapter{
 				}
 				if(key == KeyEvent.VK_UP) {
 					handler.setUpAim(true);
-					
+
 				}
 				if(key == KeyEvent.VK_DOWN) {
 					handler.setDownAim(true);
@@ -275,26 +276,32 @@ public class KeyInput extends KeyAdapter{
 			GameObject tempObject = handler.getObject().get(i);
 
 			if(tempObject.getID() == ID.Player) {
-				
 				if(key == KeyEvent.VK_W) handler.setUp(false);
 				if(key == KeyEvent.VK_S) handler.setDown(false);
 				if(key == KeyEvent.VK_A) handler.setLeft(false);
 				if(key == KeyEvent.VK_D) handler.setRight(false);
-				if(key == KeyEvent.VK_UP) {
-					handler.setUpAim(false); 
-					handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),0,-5,ID.Attack,ss, handler));
-				}
-				if(key == KeyEvent.VK_DOWN) {
-					handler.setDownAim(false);
-					handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),0,5,ID.Attack,ss, handler));
-				}
-				if(key == KeyEvent.VK_LEFT) {
-					handler.setLeftAim(false);
-					handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),-5,0,ID.Attack,ss, handler));
-				}
-				if(key == KeyEvent.VK_RIGHT) {
-					handler.setRightAim(false);
-					handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),5,0,ID.Attack,ss, handler));
+				if (HUD.getMana() > 0){
+					if(key == KeyEvent.VK_UP) {
+						HUD.setMana(HUD.getMana()-2);
+						handler.setUpAim(false); 
+						handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),0,-5,ID.Attack,ss, handler));
+					}
+					if(key == KeyEvent.VK_DOWN) {
+						HUD.setMana(HUD.getMana()-2);
+						handler.setDownAim(false);
+						handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),0,5,ID.Attack,ss, handler));
+					}
+					if(key == KeyEvent.VK_LEFT) {
+						HUD.setMana(HUD.getMana()-2);
+						handler.setLeftAim(false);
+						handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),-5,0,ID.Attack,ss, handler));
+					}
+					if(key == KeyEvent.VK_RIGHT) {
+						HUD.setMana(HUD.getMana()-2);
+						handler.setRightAim(false);
+						handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),5,0,ID.Attack,ss, handler));
+					}
+				
 				}
 				if(key == KeyEvent.VK_SPACE) {
 					handler.setSpace(false);

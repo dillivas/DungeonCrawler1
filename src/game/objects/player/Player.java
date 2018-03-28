@@ -9,6 +9,7 @@ import game.engine.Handler;
 import game.hud.HUD;
 import game.objects.GameObject;
 import game.objects.ID;
+import game.objects.items.ItemSpecs;
 import game.objects.items.Items;
 import game.render.Render;
 import game.render.SpriteSheet;
@@ -30,6 +31,8 @@ public class Player extends GameObject {
 
 	//Store pressLength
 	private int pressLength = 4;
+	private int counter = 100;
+	private static boolean display = false;
 
 	/**
 	 * Player constructor
@@ -86,7 +89,12 @@ public class Player extends GameObject {
 			if(tempObject.getID() == ID.Enemy) {
 
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Enemy)) {
-					HUD.setHealth(HUD.getHealth() - 1);
+					if(ItemSpecs.getInvincible() == true && counter > 0) {
+						counter--;
+					}
+					else {
+						HUD.setHealth(HUD.getHealth() - 1);
+					}
 				}
 			}
 			if(tempObject.getID() == ID.Lava) {
@@ -96,14 +104,13 @@ public class Player extends GameObject {
 				}
 			}
 			if(tempObject.getID() == ID.Items) {
-
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Items)) {
+					setDisplay(true);
 					Items item = (Items) tempObject;	
 					System.out.println(item.getItemType());
 					pouch.add(item.getItemType());
-					//System.out.println(item.getBounds());
-					
 					handler.removeObject(tempObject);
+					
 				}
 			}
 		}
@@ -111,6 +118,12 @@ public class Player extends GameObject {
 	
 	public static ArrayList<String> getPouch() {
 		return pouch;
+	}
+	public static boolean getDisplay() {
+		return display;
+	}
+	public static void setDisplay(boolean s) {
+		display = s;
 	}
 
 	/**

@@ -75,6 +75,10 @@ public class GameScreen{
 		if (Game.getStart()  == false) {
 			//Image of start selected
 			//g.drawImage(Render.getGameStart(),0,0,Game.WIDTH,Game.HEIGHT, null);
+			if (lock == 1) {
+				KeyInput.setDown(false);
+				KeyInput.setUp(false);
+			}
 
 			if(KeyInput.getDown()== true) {
 				KeyInput.setDown(false);
@@ -112,7 +116,6 @@ public class GameScreen{
 
 			}
 		}
-		System.out.println(start);
 	}
 
 	public void pauseScreen(Graphics g) {
@@ -120,7 +123,7 @@ public class GameScreen{
 		for (int k = 0; k <= Player.getPouch().size()-1; k++) {
 
 			if (Player.getPouch().size() == 0) {
-				System.out.print("Empty list");
+				System.out.print("");
 			}
 			else {
 				g.drawImage(Render.getHealthPotion(),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
@@ -130,9 +133,17 @@ public class GameScreen{
 
 		if(KeyInput.getDown() == true) {
 			KeyInput.setDown(false);
-			if (count < 2) {
-				count++;
-				total = 0;
+			if (Player.getPouch().size()==0){
+				if (count < 1) {
+					count++;
+					total = 0;
+				}
+			}
+			else {
+				if (count < 2) {
+					count++;
+					total = 0;
+				}
 			}
 		}
 
@@ -145,7 +156,7 @@ public class GameScreen{
 		}
 		if (KeyInput.getRight() == true){
 			KeyInput.setRight(false);
-			if (total < 7) {
+			if (total < Player.getPouch().size()-1) {
 				total++;
 			}
 		}
@@ -155,7 +166,6 @@ public class GameScreen{
 				total--;
 			}
 		}
-		System.out.println("count: " + count);
 		switch(count) {
 		case 0:
 			g.drawImage(Render.getPauseQuit(),0,0,Game.WIDTH-5,Game.HEIGHT-30, null);
@@ -175,7 +185,20 @@ public class GameScreen{
 			g.drawImage(Render.getBorder(),BORDER_X + (61*total),BORDER_Y,BORDER_WIDTH,BORDER_HEIGHT, null);
 			if(KeyInput.getSpace() == true) { 
 				ItemSpecs.getSpecs(Player.getPouch().get(total));
-				g.drawImage(Items.getImage(Player.getPouch().get(total)),0,0,0,0, null);
+				if(Player.getPouch().size() == total+1) {
+					Player.getPouch().remove(total);
+					total--;
+					KeyInput.setSpace(false);
+				}
+				else {
+					Player.getPouch().remove(total);
+				}
+				if(Player.getPouch().size() == 0) {
+					count--;
+					KeyInput.setSpace(false);
+				}
+				//Player.getPouch().remove(total);
+				//g.drawImage(Items.getImage(Player.getPouch().get(total)),0,0,0,0, null);
 
 			}
 

@@ -59,11 +59,38 @@ public class Render {
 	private static BufferedImage manaPotion;	
 	private static BufferedImage invinciblePotion;
 	private static BufferedImage border;
+	private static BufferedImage healthBar;
+	private static BufferedImage manaBar;
+	private static BufferedImage barOutline;
 
 	
 	/**
 	 * @return the healthPotion
 	 */
+	
+	public static BufferedImage getBarOutline() {
+		return barOutline;
+	}
+	
+	public static void setBarOutline(BufferedImage barOutline) {
+		Render.barOutline = barOutline;
+	}
+	
+	public static BufferedImage getManaBar() {
+		return manaBar;
+	}
+	
+	public static void setManaBar(BufferedImage manaBar) {
+		Render.manaBar = manaBar;
+	}
+	
+	public static BufferedImage getHealthBar() {
+		return healthBar;
+	}
+	
+	public static void setHealthBar(BufferedImage healthBar) {
+		Render.healthBar = healthBar;
+	}
 	
 	public static BufferedImage getBorder() {
 		return border;
@@ -556,6 +583,10 @@ public class Render {
 			invinciblePotion = ImageIO.read(new File("src/itemImages/invincibilityPotion.png"));
 			
 			border = ImageIO.read(new File("src/Images/border.png"));
+			healthBar = ImageIO.read(new File("src/Images/healthBar.png"));
+			manaBar = ImageIO.read(new File("src/Images/manaBar.png"));
+			barOutline = ImageIO.read(new File("src/Images/barOutlines.png"));
+
 
 
 

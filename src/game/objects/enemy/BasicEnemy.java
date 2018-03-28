@@ -100,7 +100,7 @@ public class BasicEnemy extends GameObject{
 	 */
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(getX() ,getY() ,40,40);
+		return new Rectangle(getX() ,getY() ,20,20);
 	}
 	
 	/**
