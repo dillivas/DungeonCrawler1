@@ -32,7 +32,10 @@ public class Player extends GameObject {
 	//Store pressLength
 	private int pressLength = 4;
 	private int counter = 100;
-	private static boolean display = false;
+
+	// store player coordinates
+	private static int yCoor;
+	private static int xCoor;
 
 	/**
 	 * Player constructor
@@ -54,6 +57,8 @@ public class Player extends GameObject {
 	public void tick() {
 		setX(getX() + getSpeedX());
 		setY(getY() + getSpeedY());
+		xCoor = getX();
+		yCoor = getY();
 
 		//Call collision function
 		collision();
@@ -70,6 +75,21 @@ public class Player extends GameObject {
 
 		if(handler.getLeft()) setSpeedX(-3);
 		else if(!handler.getRight()) setSpeedX(0);
+	}
+	
+	/**
+	 * This is the Players x coordinate.
+	 * @return xCoor
+	 */
+	public static int getXcoor(){
+		return xCoor;
+	}
+	/**
+	 * This is the Players y coordinate.
+	 * @return yCoor
+	 */
+	public static int getYcoor(){
+		return yCoor;
 	}
 
 	/**
@@ -105,33 +125,41 @@ public class Player extends GameObject {
 			}
 			if(tempObject.getID() == ID.Items) {
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Items)) {
-					setDisplay(true);
 					Items item = (Items) tempObject;	
-					System.out.println(item.getItemType());
 					pouch.add(item.getItemType());
 					handler.removeObject(tempObject);
 					
 				}
 			}
 		}
+		if (getXcoor()< 0) {
+			setX(514);
+		}
+		if (getXcoor() == 514) {
+			setX(0);
+		}
+		if (getYcoor()> 420) {
+			setY(90);
+		}
+		if (getYcoor()<90) {
+			setY(420);
+		}
 	}
 	
+	/**
+	 * This is the Players item box.
+	 * @return Rectangle returns pouch
+	 */
 	public static ArrayList<String> getPouch() {
 		return pouch;
 	}
-	public static boolean getDisplay() {
-		return display;
-	}
-	public static void setDisplay(boolean s) {
-		display = s;
-	}
-
+	
 	/**
 	 * This is the Players hit box.
 	 * @return Rectangle returns hit box
 	 */
 	public Rectangle getBounds() {
-		return new Rectangle(getX(),getY(),32,32);
+		return new Rectangle(getX(),getY(),30,30);// was 32, but he was too wide to fit some corners
 	}
 
 	/**

@@ -3,23 +3,18 @@ package game.objects.items;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Random;
-import java.util.stream.IntStream;
-
 import game.objects.GameObject;
 import game.objects.ID;
-import game.objects.player.Player;
-import game.render.Render;
 import game.render.SpriteSheet;
 
 /**
- * Class controls Lava object
- * @author Sierra
- * date 2/27/2018
- * class Lava
+ * date: 4/3/2018      						*
+ * class: Items             				*
+ *            								*
+ * The class control's the Item type    	*
+ * 											*
+ * @author Sierra							*
  */
 public class Items extends GameObject{
 
@@ -28,12 +23,9 @@ public class Items extends GameObject{
 	private static BufferedImage manaPotion;
 	private static BufferedImage invincibilityPotion;
 	private BufferedImage chest;
-	private BufferedImage openChest;
 	private Random rand;
 	private static int q = 0;
 	private String potionType;
-
-	static HashMap<Rectangle, String> box = new HashMap<Rectangle, String>();
 
 	/**
 	 * Lava constructor
@@ -42,6 +34,13 @@ public class Items extends GameObject{
 	 * @param id of object
 	 * @param ss sprite image of object
 	 */
+	public Items(int x, int y, ID id, SpriteSheet ss) {
+		super(x, y, id, ss);
+		setIndex();
+		
+		loadImage(ss);
+		chest = ss.grabImage(5,1,32,32); 
+	}
 
 	public String getItemType() {
 		return potionType;
@@ -62,26 +61,11 @@ public class Items extends GameObject{
 			this.potionType = "invincibility";
 			break;
 		}
-
-		System.out.println(q);
 		return q;
 	}
 	public static int getIndex() {
 		return q;
 	}
-	public Items(int x, int y, ID id, SpriteSheet ss) {
-		super(x, y, id, ss);
-		setIndex();
-		//random spawn of value based upon first value starting at 7-9 curently
-		//itemBox();
-		//System.out.println(box.keys());
-		//System.out.println(box.get(getBounds()));
-		loadImage(ss);
-		chest = ss.grabImage(5,1,32,32); 
-		openChest = ss.grabImage(6,1,32,32); 
-
-	}
-
 
 	/**
 	 * Update lava object.
@@ -89,7 +73,6 @@ public class Items extends GameObject{
 	 */
 	@Override
 	public void tick() {
-
 	}
 
 	/**
@@ -98,13 +81,6 @@ public class Items extends GameObject{
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(chest, getX(), getY(),32,32,null);
-
-		if (Player.getDisplay() == true) {
-			for (int a = 0; a< 10; a++) {
-				g.drawImage(openChest, getX(), getY(),32,32,null);
-			}
-			Player.setDisplay(false);
-		}
 	}
 
 	/**
@@ -115,16 +91,20 @@ public class Items extends GameObject{
 		return new Rectangle(getX(),getY(),32,32);
 	}
 
-	public static HashMap<Rectangle, String> getBox() {
-		return box;
-	}
-
+	/**
+	 * loads the item's images
+	 * @param SpriteSheet ss
+	 */
 	public void loadImage(SpriteSheet ss) {
 		healthPotion = ss.grabImage(7,1,32,32);
-		manaPotion = ss.grabImage(8,1,32,32); //
+		manaPotion = ss.grabImage(8,1,32,32); 
 		invincibilityPotion = ss.grabImage(9,1,32,32);
 	}
 
+	/**
+	 * gets the item image related to variable
+	 * @param String s
+	 */
 	public static BufferedImage getImage(String s) {
 		if (s == "healthPotion") {
 			return healthPotion;
@@ -139,8 +119,22 @@ public class Items extends GameObject{
 			return null;
 		}
 	}
-
-
+	/**
+	 * gets the item image related to variable
+	 * @param String s
+	 */
+	public static String getString(String s) {
+		if (s == "healthPotion") {
+			return "Health potion: returns the player to full health";
+		}
+		if (s == "manaPotion") {
+			return "Mana potion: returns the player to full mana";
+		}
+		if (s == "invincibility") {
+			return "Shield: provides the user invincibility for a few hits";
+		}
+		else {
+			return null;
+		}
+	}
 }
-//create an array for all items
-// create an array for character items

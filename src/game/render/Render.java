@@ -65,60 +65,99 @@ public class Render {
 
 	
 	/**
-	 * @return the healthPotion
+	 * @return the barOutline
 	 */
-	
 	public static BufferedImage getBarOutline() {
 		return barOutline;
 	}
 	
+	/**
+	 * @param barOutline the barOutline to set
+	 */
 	public static void setBarOutline(BufferedImage barOutline) {
 		Render.barOutline = barOutline;
 	}
 	
+	/**
+	 * @return the manaBar
+	 */
 	public static BufferedImage getManaBar() {
 		return manaBar;
 	}
 	
+	/**
+	 * @param manaBar the manaBar to set
+	 */
 	public static void setManaBar(BufferedImage manaBar) {
 		Render.manaBar = manaBar;
 	}
 	
+	/**
+	 * @return the healthBar
+	 */
 	public static BufferedImage getHealthBar() {
 		return healthBar;
 	}
 	
+	/**
+	 * @param healthBar the healthBar to set
+	 */
 	public static void setHealthBar(BufferedImage healthBar) {
 		Render.healthBar = healthBar;
 	}
 	
+	/**
+	 * @return the border
+	 */
 	public static BufferedImage getBorder() {
 		return border;
 	}
 	
+	/**
+	 * @param border the border to set
+	 */
 	public static void setBorder(BufferedImage border) {
 		Render.border = border;
 	}
 	
+	/**
+	 * @return the healthPotion
+	 */
 	public static BufferedImage getHealthPotion() {
 		return healthPotion;
 	}
 	
+	/**
+	 * @param healthPotion the healthPotion to set
+	 */
 	public static void setHealthPotion(BufferedImage healthPotion) {
 		Render.healthPotion = healthPotion;
 	}
 	
+	/**
+	 * @return the invinciblePotion
+	 */
 	public static BufferedImage getInvinciblePotion() {
 		return invinciblePotion;
 	}
 	
+	/**
+	 * @param invinciblePotion the invinciblePotion to set
+	 */
 	public static void setInvinciblePotion(BufferedImage healthPotion) {
 		Render.invinciblePotion = healthPotion;
 	}
+	
+	/**
+	 * @return the manaPotion
+	 */
 	public static BufferedImage getManaPotion() {
 		return manaPotion;
 	}
 	
+	/**
+	 * @param manaPotion the manaPotion to set
+	 */
 	public static void setManaPotion(BufferedImage healthPotion) {
 		Render.manaPotion = healthPotion;
 	}
@@ -537,7 +576,7 @@ public class Render {
 	 */
 	public static void load()
 	{
-		// Try/catch for incase image can't be found
+		// Try/catch for in case image can't be found
 		try {
 			System.out.println("image loaded");
 			playerStop = ImageIO.read(new File("src/player_images/forward_stand.gif"));

@@ -1,19 +1,20 @@
 package game.render;
 
-import java.awt.Color;
 import java.awt.Graphics;
-
 import game.controls.KeyInput;
 import game.engine.Game;
 import game.hud.HUD;
 import game.objects.items.ItemSpecs;
-//import game.objects.items.ItemSpecs;
 import game.objects.items.Items;
 import game.objects.player.Player;
 
 /**
- * This Function Controls the pause and start screen of the game.
- * @author Sierra
+ * date: 4/3/2018       					*
+ * class: GameScreen    					*
+ *            								*
+ * The class control's the game screens  	*
+ * 											*
+ * @author Sierra						*
  */
 public class GameScreen{
 
@@ -30,16 +31,25 @@ public class GameScreen{
 			BORDER_WIDTH = IMAGE_WIDTH +99, BORDER_HEIGHT = IMAGE_HEIGHT+107, BORDER_X = IMAGE_X-50, BORDER_Y = IMAGE_Y-30;
 
 	/**
-	 * get lastKey
-	 * @return lastKey pressed
+	 * get count
+	 * @return count
 	 */
 	public int getCount() {
 		return count;
 	}
-
+	
+	/**
+	 * set count
+	 * @param c store
+	 */
 	public static void setC(int c) {
 		count = c;
 	}
+	
+	/**
+	 * get total
+	 * @return total
+	 */
 	public int getTotal() {
 		return total;
 	}
@@ -67,29 +77,34 @@ public class GameScreen{
 	public void setLastKey(char lastKey) {
 		this.lastKey = lastKey;
 	}
-
+	
+	/**
+	 * controls the start screen
+	 * @param Graphics g
+	 */
 	public void startScreen(Graphics g) {
 		/**
 		 * Controls the start screen
 		 */
 		if (Game.getStart()  == false) {
-			//Image of start selected
-			//g.drawImage(Render.getGameStart(),0,0,Game.WIDTH,Game.HEIGHT, null);
+			//Image of start selected if there is no toggle
 			if (lock == 1) {
 				KeyInput.setDown(false);
 				KeyInput.setUp(false);
 			}
-
+			// Keeps track of downward scroll
 			if(KeyInput.getDown()== true) {
 				KeyInput.setDown(false);
 				if (start < 1)
 					start++;
 			}
+			// Keeps track of upward scroll
 			if(KeyInput.getUp()== true) {
 				KeyInput.setUp(false);
 				if (start > 0)
 					start--;
 			}
+			// based on number of upward/ downard scrolls determines image rendered
 			switch(start) {
 			case 0:
 				if (lock == 0) {
@@ -101,12 +116,14 @@ public class GameScreen{
 				if (lock == 2) {
 					Game.setStart(true);
 				}
+				// takes care of game start and instructions
 				if(KeyInput.getSpace() == true) { // if(KeyInput.getSpace() == true && count < 2) {
 					g.drawImage(Render.getInstructions(),0,0,Game.WIDTH-5,Game.HEIGHT-30, null);
 					KeyInput.setSpace(false);
 					lock++;
 				}
 				break;
+				// takes care of quit action
 			case 1:
 				g.drawImage(Render.getStartQuit(),0,0,Game.WIDTH-5,Game.HEIGHT-30, null);
 				if(KeyInput.getSpace() == true) {   // if(KeyInput.getSpace() == true && count < 2) {
@@ -118,6 +135,10 @@ public class GameScreen{
 		}
 	}
 
+	/**
+	 * controls the pause screen
+	 * @param Graphics g
+	 */
 	public void pauseScreen(Graphics g) {
 		g.drawImage(Render.getPauseQuit(),0,0,Game.WIDTH-5,Game.HEIGHT-30, null);
 		for (int k = 0; k <= Player.getPouch().size()-1; k++) {
@@ -126,11 +147,11 @@ public class GameScreen{
 				System.out.print("");
 			}
 			else {
-				g.drawImage(Render.getHealthPotion(),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
+				//g.drawImage(Render.getHealthPotion(),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
 				//	System.out.println(Player.getPouch().get(k));
 			}
 		}
-
+		// allows for user to scroll up and down
 		if(KeyInput.getDown() == true) {
 			KeyInput.setDown(false);
 			if (Player.getPouch().size()==0){
@@ -154,6 +175,7 @@ public class GameScreen{
 				total = 0;
 			}
 		}
+		//allows user to scroll left and right
 		if (KeyInput.getRight() == true){
 			KeyInput.setRight(false);
 			if (total < Player.getPouch().size()-1) {
@@ -167,6 +189,7 @@ public class GameScreen{
 			}
 		}
 		switch(count) {
+		// based on count determines which screen is pulled
 		case 0:
 			g.drawImage(Render.getPauseQuit(),0,0,Game.WIDTH-5,Game.HEIGHT-30, null);
 			if(KeyInput.getSpace() == true) {   // if(KeyInput.getSpace() == true && count < 2) {
@@ -183,6 +206,7 @@ public class GameScreen{
 		case 2:
 			g.drawImage(Render.getPauseItem(),0,0,Game.WIDTH-5,Game.HEIGHT-30, null);
 			g.drawImage(Render.getBorder(),BORDER_X + (61*total),BORDER_Y,BORDER_WIDTH,BORDER_HEIGHT, null);
+			g.drawString(Items.getString(Player.getPouch().get(total)),25, BORDER_Y +110);
 			if(KeyInput.getSpace() == true) { 
 				ItemSpecs.getSpecs(Player.getPouch().get(total));
 				if(Player.getPouch().size() == total+1) {
@@ -197,14 +221,12 @@ public class GameScreen{
 					count--;
 					KeyInput.setSpace(false);
 				}
-				//Player.getPouch().remove(total);
-				//g.drawImage(Items.getImage(Player.getPouch().get(total)),0,0,0,0, null);
-
 			}
 
 			break;
 
 		}
+		//draws images in item box
 		for (int k = 0; k <= Player.getPouch().size()-1; k++) {
 
 			if (Player.getPouch().size() == 0) {
@@ -212,21 +234,6 @@ public class GameScreen{
 			} 
 			else {
 				g.drawImage(Items.getImage(Player.getPouch().get(k)),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
-				//System.out.println(Player.getPouch().get(k));
-				/*switch(Player.getPouch().get(k)) {
-				case "healthPotion":
-					g.drawImage(Render.getHealthPotion(),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
-
-					break;
-				case "invinsiblity":
-					g.drawImage(Render.getHealthPotion(),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
-
-					break;
-				case "manaPotion":
-					g.drawImage(Render.getHealthPotion(),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
-
-					break;
-				}*/
 			}
 		}
 
@@ -250,13 +257,18 @@ public class GameScreen{
 		 */
 		if(HUD.getHealth() == 0) {
 			//Quite selected
+			g.drawImage(Render.getGameQuit(),0,0,Game.WIDTH,Game.HEIGHT, null);
+			if(KeyInput.getUp() == false && (KeyInput.getDown() == false)) {
+				if(KeyInput.getSpace() == true) {
+					System.exit(1);
+				}
+			}
 			if(KeyInput.getUp() == true) {
 				g.drawImage(Render.getGameQuit(),0,0,Game.WIDTH,Game.HEIGHT, null);
 
 				if(KeyInput.getSpace() == true) {
 					System.exit(1);
 				}
-				//g.fillRect(x, y, 32, 32);
 			}
 			//Restart selected
 			if (KeyInput.getDown() == true){

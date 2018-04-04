@@ -2,11 +2,10 @@ package game.objects.enemy;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.Random;
-
 import game.engine.Handler;
 import game.objects.GameObject;
 import game.objects.ID;
+import game.objects.player.Player;
 import game.render.Render;
 import game.render.SpriteSheet;
 
@@ -25,19 +24,17 @@ public class BasicEnemy extends GameObject{
 	 * random set up for its movement, and its hp.
 	 * 
 	 */
-	 private Handler handler;
-	 private Random rand = new Random();
-	 private int choose = 0;
-	 private int hp = 100;
-	
-	 /**
-	  * BasicEnemy Constructor
-	  * @param x axis location of enemy
-	  * @param y axis location of enemy
-	  * @param id of object
-	  * @param ss sprite image of object
-	  * @param handler connection for object use.
-	  */
+	private Handler handler;
+	private int hp = 100;
+
+	/**
+	 * BasicEnemy Constructor
+	 * @param x axis location of enemy
+	 * @param y axis location of enemy
+	 * @param id of object
+	 * @param ss sprite image of object
+	 * @param handler connection for object use.
+	 */
 	public BasicEnemy(int x, int y, ID id, SpriteSheet ss, Handler handler) {
 		super(x, y, id, ss);
 		this.handler=handler;
@@ -50,23 +47,35 @@ public class BasicEnemy extends GameObject{
 	public void tick() {
 		setX(getX() + getSpeedX());
 		setY(getY() + getSpeedY());
-		
-		choose = rand.nextInt(10);
+		// determines the coordinates for the enemy to follow
+		if (Player.getXcoor() > getX()) {
+			setSpeedX(1);
+		}
+		if (Player.getXcoor() < getX()) {
+			setSpeedX(-1);
+		}
+		if (Player.getYcoor() > getY()) {
+			setSpeedY(1);
+		}
+		if (Player.getYcoor() < getY()) {
+			setSpeedY(-1);
+		}
+
 		//AI behavior found on:
 		//https://www.youtube.com/watch?v=JBGCCAv76YI&t=1s
-		
+		// following code did not use link
 		for(int i = 0; i < handler.getObject().size(); i++) {
-			GameObject tempObject = handler.getObject().get(i);
-					
+			GameObject tempObject = handler.getObject().get(i);	
+			// prevents collision with the walls of the room
 			if(tempObject.getID() == ID.Block) {
-				if(getBoundsWall().intersects(tempObject.getBounds())) {
-					setX(getX() + (getSpeedX()*2) * -1);
-					setY(getY() + (getSpeedY()*2) * -1);
-					setSpeedX(0);
-					setSpeedY(0);
-				}else if(choose == 0) {
-					setSpeedX((rand.nextInt(4 - -4) + -4));
-					setSpeedY((rand.nextInt(4 - -4) + -4));
+				if(getBounds().intersects(tempObject.getBounds())) {
+					if (getX() < Player.getXcoor()+32 && (getX() > Player.getXcoor()-32)) {
+						setSpeedY(getSpeedY()*-1);
+					}
+		
+					else {
+						setSpeedX(getSpeedX()*-1);
+					}
 				}
 			}
 			//Collision effects on enemy
@@ -80,13 +89,14 @@ public class BasicEnemy extends GameObject{
 			if(tempObject.getID() == ID.Lava) {
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Lava)) {
 					hp -= 1;
-				
+
 				}
 			}
 		}
 		if(hp <= 0) handler.removeObject(this);
 	}
-	
+
+
 	/**
 	 * render enemy image
 	 */
@@ -100,9 +110,9 @@ public class BasicEnemy extends GameObject{
 	 */
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(getX() ,getY() ,20,20);
+		return new Rectangle(getX() ,getY() ,32,32);//20
 	}
-	
+
 	/**
 	 * Add second hit box for enemy AI pathing
 	 * @return rectangle for hitbox

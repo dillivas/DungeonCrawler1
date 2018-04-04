@@ -289,9 +289,9 @@ public class Game extends Canvas implements Runnable{
 				if(red == 190 && green == 60 && blue == 190) {
 					handler.addObject(new BasicEnemy(xx*32, yy*32 + 96, ID.Enemy,ss, handler));
 				}
-				if(red == 255 && green == 255 && blue == 255) {
-					handler.addObject(new InvisibleBlock(xx*32, yy*32 + 96, ID.Block,ss));
-				}
+				//if(red == 255 && green == 255 && blue == 255) {
+				//	handler.addObject(new InvisibleBlock(xx*32, yy*32 + 96, ID.Block,ss));
+			//	}
 				//////////////////////////////////////////////////////////
 				
 			}
