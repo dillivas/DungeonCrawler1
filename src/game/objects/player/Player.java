@@ -5,8 +5,10 @@ import java.awt.Rectangle;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import game.engine.Game;
 import game.engine.Handler;
 import game.hud.HUD;
+import game.map.Dungeon;
 import game.objects.GameObject;
 import game.objects.ID;
 import game.objects.items.ItemSpecs;
@@ -22,6 +24,9 @@ import game.render.SpriteSheet;
  */
 public class Player extends GameObject {
 
+	public static final int TOP = 1, RIGHT = 2, BOTTOM = 3, LEFT = 4;
+	public static final int TOPSCREEN = 96, LEFTSCREEN = 0, BOTTOMSCREEN = 478, RIGHTSCREEN = 550;
+	
 	//Store handler for later use
 	private Handler handler;
 	private static ArrayList<String> pouch;
@@ -36,7 +41,9 @@ public class Player extends GameObject {
 	// store player coordinates
 	private static int yCoor;
 	private static int xCoor;
-
+	private Dungeon dungeon;
+	private Game game;
+	
 	/**
 	 * Player constructor
 	 * @param x coordinate of player
@@ -45,10 +52,12 @@ public class Player extends GameObject {
 	 * @param ss spread sheet
 	 * @param handler handler for object use
 	 */
-	public Player(int x, int y, ID id, SpriteSheet ss, Handler handler) {
+	public Player(int x, int y, ID id, SpriteSheet ss, Handler handler,Dungeon dungeon, Game game) {
 		super(x, y, id, ss);
 		this.handler = handler;
 		pouch = new ArrayList<String>();
+		this.game = game;
+		this.dungeon = dungeon;
 	}
 
 	/**
@@ -132,17 +141,33 @@ public class Player extends GameObject {
 				}
 			}
 		}
-		if (getXcoor()< 0) {
-			setX(514);
+		if (getXcoor() < LEFTSCREEN + 10) {
+			setX(RIGHTSCREEN - 10);
+			dungeon.setPlayerLocX(RIGHTSCREEN - 10);
+			dungeon.setNextPlayerRoom(LEFT);
+			dungeon.setLeftRoom(true);
+			//game.loadNewRoom();
 		}
-		if (getXcoor() == 514) {
-			setX(0);
+		if (getXcoor() > RIGHTSCREEN - 10) {
+			setX(LEFTSCREEN + 10);
+			dungeon.setPlayerLocX(LEFTSCREEN + 10);
+			dungeon.setNextPlayerRoom(RIGHT);
+			dungeon.setLeftRoom(true);
+			//game.loadNewRoom();
 		}
-		if (getYcoor()> 420) {
-			setY(90);
+		if (getYcoor() > BOTTOMSCREEN - 10) {
+			setY(TOPSCREEN + 10);
+			dungeon.setPlayerLocY(TOPSCREEN + 10);
+			dungeon.setNextPlayerRoom(BOTTOM);
+			dungeon.setLeftRoom(true);
+			//game.loadNewRoom();
 		}
-		if (getYcoor()<90) {
-			setY(420);
+		if (getYcoor() < TOPSCREEN + 10) {
+			setY(BOTTOMSCREEN - 10);
+			dungeon.setPlayerLocY(BOTTOMSCREEN - 10);
+			dungeon.setNextPlayerRoom(TOP);
+			dungeon.setLeftRoom(true);
+			//game.loadNewRoom();
 		}
 	}
 	
@@ -225,4 +250,5 @@ public class Player extends GameObject {
 			}
 		}	
 	}
+
 }

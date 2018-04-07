@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 
 import game.controls.KeyInput;
 import game.hud.HUD;
+import game.map.Dungeon;
+import game.objects.GameObject;
 import game.objects.ID;
 import game.objects.enemy.BasicEnemy;
 import game.objects.player.Player;
@@ -32,7 +34,8 @@ public class Game extends Canvas implements Runnable{
 
 	//Window Size settings
 	//public static final int WIDTH = 640, HEIGHT = 512;
-	public static final int WIDTH = 550, HEIGHT = 446 + 32;
+	public static final int WIDTH = 550, HEIGHT = 478;
+	public static final int TOP = 1, RIGHT = 2, BOTTOM = 3, LEFT = 4;
 
 	/**
 	 * Variables to hold all of the important game functions
@@ -48,11 +51,13 @@ public class Game extends Canvas implements Runnable{
 	private GameScreen gameScreen;
 	private SpriteSheet ss;
 	private SpriteSheet is;
+	private SpriteSheet ms;
 	private BufferedImage spriteSheet = null;
 	private BufferedImage itemSheet = null;
+	private BufferedImage levelSheet = null;
 
+	private Dungeon dungeon = null;
 	private BufferedImage floor = null;
-	private BufferedImage level = null;
 	private static boolean start = false;
 	private static boolean restart = true;
 
@@ -61,23 +66,12 @@ public class Game extends Canvas implements Runnable{
 	 * Game object constructed
 	 */
 	public Game() {
-
+		
+		//Setup Game Window
 		new Window(WIDTH, HEIGHT, "Dungeon Crawler", this);
 		
-		//The order that these load in is very important
-		Render.load();
-		handler = new Handler();
-		//camera = new Camera(0,0);
-		//new Window(WIDTH, HEIGHT, "Dungeon Crawler", this);
-		BufferedImageLoader loader = new BufferedImageLoader();
-		level = loader.loadImage("/Test5.png");
-		spriteSheet = loader.loadImage("/BlocksNew.png");
-		ss = new SpriteSheet(spriteSheet);
-		floor = ss.grabImage(1, 1, 32, 32);
-		loadLevel(level);
-		hud = new HUD();
-		gameScreen = new GameScreen();
-		this.addKeyListener(new KeyInput(handler, ss));
+		//Setup Game
+		setup();
 
 		//Start Game
 		start();
@@ -92,25 +86,31 @@ public class Game extends Canvas implements Runnable{
 		running = true;
 	}
 	
-	/**
-	 * This class restarts the game
-	 */
-	public void restart() {
+	public void setup() {
 		Render.load();
 		handler = new Handler();
 		//new Window(WIDTH, HEIGHT, "Dungeon Crawler", this);
 		BufferedImageLoader loader = new BufferedImageLoader();
-		level = loader.loadImage("/Test5.png");
+		levelSheet = loader.loadImage("/Test5.png");
 		spriteSheet = loader.loadImage("/BlocksNew.png");
 		ss = new SpriteSheet(spriteSheet);
+		ms = new SpriteSheet(levelSheet);
+		dungeon = new Dungeon(ms);
 		floor = ss.grabImage(1, 1, 32, 32);
-		loadLevel(level);
+		loadLevel(dungeon.getRoom(dungeon.getPlayerInRoomX(), dungeon.getPlayerInRoomY()));
 		hud = new HUD();
-		HUD.setHealth(100);
-		HUD.setMana(100);
 		gameScreen = new GameScreen();
 		this.addKeyListener(new KeyInput(handler, ss));
-
+	}
+	
+	/**
+	 * This class restarts the game
+	 */
+	public void restart() {
+		HUD.setHealth(100);
+		HUD.setMana(100);
+		
+		setup();
 	}
 	
 	/**
@@ -154,6 +154,12 @@ public class Game extends Canvas implements Runnable{
 		int frames = 0;
 		int updates = 0;
 		while(running){
+			if(dungeon.getLeftRoom() == true) {
+				loadNewRoom();
+				dungeon.setLeftRoom(false);
+			}
+				
+			
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
@@ -263,7 +269,7 @@ public class Game extends Canvas implements Runnable{
 	private void loadLevel(BufferedImage image) {
 		int width = image.getWidth();
 		int height = image.getHeight();
-
+		
 		for(int xx = 0; xx < width; xx++) {
 			for(int yy = 0; yy < height; yy++) {
 				int pixel = image.getRGB(xx, yy);
@@ -273,10 +279,7 @@ public class Game extends Canvas implements Runnable{
 				//Code between lines controls what objects are rendered into the game.
 				/////////////////////////////////////////////////////////
 				//Load Level First then enemy and player
-				
-				if(red == 0 && green == 0 && blue == 255) {
-					handler.addObject(new Player(xx*32, yy*32 + 96, ID.Player,ss, handler));
-				}
+
 				if(red == 255 && green == 0 && blue == 0) {
 					handler.addObject(new Block(xx*32, yy*32 + 96, ID.Block,ss));
 				}
@@ -289,13 +292,38 @@ public class Game extends Canvas implements Runnable{
 				if(red == 190 && green == 60 && blue == 190) {
 					handler.addObject(new BasicEnemy(xx*32, yy*32 + 96, ID.Enemy,ss, handler));
 				}
-				//if(red == 255 && green == 255 && blue == 255) {
-				//	handler.addObject(new InvisibleBlock(xx*32, yy*32 + 96, ID.Block,ss));
-			//	}
-				//////////////////////////////////////////////////////////
-				
 			}
 		}
+		handler.addObject(new Player(dungeon.getPlayerLocX(), dungeon.getPlayerLocY() + 96, ID.Player,ss, handler, dungeon, this));
+	}
+	
+	public void loadNewRoom(){
+		
+		if(dungeon.getNextPlayerRoom() != 0) {
+			//Dispose of old objects			
+			handler.clear();
+			
+			if(dungeon.getNextPlayerRoom() == TOP)
+				dungeon.setPlayerInRoomY(dungeon.getPlayerInRoomY() - 1);
+			if(dungeon.getNextPlayerRoom() == BOTTOM)
+				dungeon.setPlayerInRoomY(dungeon.getPlayerInRoomY() + 1);
+			if(dungeon.getNextPlayerRoom() == LEFT)
+				dungeon.setPlayerInRoomX(dungeon.getPlayerInRoomX() - 1);
+			if(dungeon.getNextPlayerRoom() == RIGHT)
+				dungeon.setPlayerInRoomX(dungeon.getPlayerInRoomX() + 1);
+			
+			dungeon.setNextPlayerRoom(0);
+			//Load New Level
+			loadLevel(dungeon.getRoom(dungeon.getPlayerInRoomX(), dungeon.getPlayerInRoomY()));
+		}
+	}
+	
+	public int getWidth() {
+		return WIDTH;
+	}
+	
+	public int getHeight() {
+		return HEIGHT;
 	}
 	
 	/**
