@@ -47,6 +47,7 @@ public class Game extends Canvas implements Runnable{
 	private Handler handler;
 	private Thread thread;
 	private HUD hud;
+	private Player player;
 	//private Camera camera;
 	private GameScreen gameScreen;
 	private SpriteSheet ss;
@@ -99,6 +100,9 @@ public class Game extends Canvas implements Runnable{
 		floor = ss.grabImage(1, 1, 32, 32);
 		loadLevel(dungeon.getRoom(dungeon.getPlayerInRoomX(), dungeon.getPlayerInRoomY()));
 		hud = new HUD();
+		
+		player = new Player(dungeon.getPlayerLocX(), dungeon.getPlayerLocY() + 96, ID.Player,ss, handler, dungeon, this);
+		handler.addObject(player);
 		gameScreen = new GameScreen();
 		this.addKeyListener(new KeyInput(handler, ss));
 	}
@@ -294,14 +298,17 @@ public class Game extends Canvas implements Runnable{
 				}
 			}
 		}
-		handler.addObject(new Player(dungeon.getPlayerLocX(), dungeon.getPlayerLocY() + 96, ID.Player,ss, handler, dungeon, this));
+		//handler.addObject(new Player(dungeon.getPlayerLocX(), dungeon.getPlayerLocY() + 96, ID.Player,ss, handler, dungeon, this));
 	}
 	
 	public void loadNewRoom(){
 		
 		if(dungeon.getNextPlayerRoom() != 0) {
-			//Dispose of old objects			
+			//Dispose of old objects	
+			Player tempPlayer = (Player) handler.get(player);
 			handler.clear();
+			player = tempPlayer;
+			handler.addObject(player);
 			
 			if(dungeon.getNextPlayerRoom() == TOP)
 				dungeon.setPlayerInRoomY(dungeon.getPlayerInRoomY() - 1);

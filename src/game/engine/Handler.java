@@ -37,6 +37,9 @@ public class Handler {
 	public LinkedList<GameObject> getObject() {
 		return object;
 	}
+	public Object get(Object x) {
+		return object.get(object.indexOf(x));
+	}
 
 	/**
 	 * @param object the object to set
