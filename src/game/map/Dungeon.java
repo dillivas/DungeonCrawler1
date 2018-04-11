@@ -6,6 +6,8 @@ import game.render.SpriteSheet;
 
 public class Dungeon {
 
+	//This class controls the dungeon loading 
+	
 	public static final int MAP_COL = 3, MAP_ROW = 3;
 	
 	//Hold object sprite image

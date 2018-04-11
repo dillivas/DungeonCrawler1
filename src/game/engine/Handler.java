@@ -47,6 +47,7 @@ public class Handler {
 	  */
 	 private int lastEnemyX = (32 * 8);
 	 private int lastEnemyY = (32 * 5);
+	 private boolean lastEnemyAlive = false;
 	 
 	 
 	 
@@ -308,5 +309,17 @@ public class Handler {
 	 */
 	public void setLastEnemyY(int lastEnemyY) {
 		this.lastEnemyY = lastEnemyY;
+	}
+	/**
+	 * @return the lastEnemyAlive
+	 */
+	public boolean getLastEnemyAlive() {
+		return lastEnemyAlive;
+	}
+	/**
+	 * @param lastEnemyAlive the lastEnemyAlive to set
+	 */
+	public void setLastEnemyAlive(boolean lastEnemyAlive) {
+		this.lastEnemyAlive = lastEnemyAlive;
 	}
 }

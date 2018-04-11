@@ -143,28 +143,28 @@ public class Player extends GameObject {
 		}
 		if (getXcoor() < LEFTSCREEN + 10) {
 			setX(RIGHTSCREEN - 10);
-			dungeon.setPlayerLocX(RIGHTSCREEN - 10);
+			//dungeon.setPlayerLocX(RIGHTSCREEN - 10);
 			dungeon.setNextPlayerRoom(LEFT);
 			dungeon.setLeftRoom(true);
 			//game.loadNewRoom();
 		}
 		if (getXcoor() > RIGHTSCREEN - 10) {
 			setX(LEFTSCREEN + 10);
-			dungeon.setPlayerLocX(LEFTSCREEN + 10);
+			//dungeon.setPlayerLocX(LEFTSCREEN + 10);
 			dungeon.setNextPlayerRoom(RIGHT);
 			dungeon.setLeftRoom(true);
 			//game.loadNewRoom();
 		}
 		if (getYcoor() > BOTTOMSCREEN - 10) {
 			setY(TOPSCREEN + 10);
-			dungeon.setPlayerLocY(TOPSCREEN + 10);
+			//dungeon.setPlayerLocY(TOPSCREEN + 10);
 			dungeon.setNextPlayerRoom(BOTTOM);
 			dungeon.setLeftRoom(true);
 			//game.loadNewRoom();
 		}
 		if (getYcoor() < TOPSCREEN + 10) {
 			setY(BOTTOMSCREEN - 10);
-			dungeon.setPlayerLocY(BOTTOMSCREEN - 10);
+			//dungeon.setPlayerLocY(BOTTOMSCREEN - 10);
 			dungeon.setNextPlayerRoom(TOP);
 			dungeon.setLeftRoom(true);
 			//game.loadNewRoom();

@@ -199,21 +199,14 @@ public class Game extends Canvas implements Runnable{
 	 */
 	private void tick() {
 		
-		for(int i = 0;i < handler.getObject().size(); i++) {
+		/*for(int i = 0;i < handler.getObject().size(); i++) {
 			if(handler.getObject().get(i).getID() == ID.Player) {
 				//camera.tick(handler.getObject().get(i));
 			}
-		}
+		}*/
 		
-		int numEnemys = 0;
-		
-		for(int i = 0;i < handler.getObject().size(); i++) {
-			GameObject tempObject = handler.getObject().get(i);
-			if(tempObject.getID() == ID.Enemy)
-				numEnemys++;
-		}
-		if(numEnemys == 0) {
-			//Last Enemy Location
+		if(handler.getLastEnemyAlive() == true) {
+			handler.setLastEnemyAlive(false);
 			handler.addObject(new Items(handler.getLastEnemyX(), handler.getLastEnemyY(), ID.Items,ss));
 		}
 		handler.tick();

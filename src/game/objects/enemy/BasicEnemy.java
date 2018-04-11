@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import game.engine.Handler;
 import game.objects.GameObject;
 import game.objects.ID;
+import game.objects.items.Items;
 import game.objects.player.Player;
 import game.render.Render;
 import game.render.SpriteSheet;
@@ -95,8 +96,19 @@ public class BasicEnemy extends GameObject{
 		}
 		if(hp <= 0) {
 			handler.removeObject(this);
-			handler.setLastEnemyX(getX());
-			handler.setLastEnemyY(getY());
+			int numEnemys = 0;
+			
+			for(int i = 0;i < handler.getObject().size(); i++) {
+				GameObject tempObject = handler.getObject().get(i);
+				if(tempObject.getID() == ID.Enemy)
+					numEnemys++;
+			}
+			if(numEnemys == 0) {
+				//Last Enemy Location
+				handler.setLastEnemyAlive(true) ;
+				handler.setLastEnemyX(getX());
+				handler.setLastEnemyY(getY());
+			}
 		}
 	}
 
