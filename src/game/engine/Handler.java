@@ -31,6 +31,25 @@ public class Handler {
 	 //List of objects
 	 private LinkedList<GameObject> object = new LinkedList<GameObject>();
 	 
+		/**
+	  * Variables to handle all of the players inputs.
+	  * The are Saved in handler as they function better here
+	  * then when in the keyInput class.
+	  */
+	 private boolean up = false, down = false, right = false, left = false, stop = true;
+	 private boolean upAim = false, downAim = false, rightAim = false, leftAim = false;
+	 private boolean space = false;
+	 private boolean pause = false;
+	 
+	 
+	 /**
+	  * Last enemy death location
+	  */
+	 private int lastEnemyX = (32 * 8);
+	 private int lastEnemyY = (32 * 5);
+	 
+	 
+	 
 	 /**
 	 * @return the object
 	 */
@@ -48,16 +67,6 @@ public class Handler {
 		this.object = object;
 	}
 
-	/**
-	  * Variables to handle all of the players inputs.
-	  * The are Saved in handler as they function better here
-	  * then when in the keyInput class.
-	  */
-	 private boolean up = false, down = false, right = false, left = false, stop = true;
-	 private boolean upAim = false, downAim = false, rightAim = false, leftAim = false;
-	 private boolean space = false;
-	 private boolean pause = false;
-	 
 	 /**
 	  * get pause
 	  * @return pause
@@ -276,4 +285,28 @@ public class Handler {
 	 public void clear() {
 		 this.object.clear();
 	 }
+	/**
+	 * @return the lastEnemyX
+	 */
+	public int getLastEnemyX() {
+		return lastEnemyX;
+	}
+	/**
+	 * @param lastEnemyX the lastEnemyX to set
+	 */
+	public void setLastEnemyX(int lastEnemyX) {
+		this.lastEnemyX = lastEnemyX;
+	}
+	/**
+	 * @return the lastEnemyY
+	 */
+	public int getLastEnemyY() {
+		return lastEnemyY;
+	}
+	/**
+	 * @param lastEnemyY the lastEnemyY to set
+	 */
+	public void setLastEnemyY(int lastEnemyY) {
+		this.lastEnemyY = lastEnemyY;
+	}
 }

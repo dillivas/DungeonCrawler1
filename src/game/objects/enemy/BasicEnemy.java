@@ -93,7 +93,11 @@ public class BasicEnemy extends GameObject{
 				}
 			}
 		}
-		if(hp <= 0) handler.removeObject(this);
+		if(hp <= 0) {
+			handler.removeObject(this);
+			handler.setLastEnemyX(getX());
+			handler.setLastEnemyY(getY());
+		}
 	}
 
 

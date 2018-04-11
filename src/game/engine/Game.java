@@ -205,6 +205,17 @@ public class Game extends Canvas implements Runnable{
 			}
 		}
 		
+		int numEnemys = 0;
+		
+		for(int i = 0;i < handler.getObject().size(); i++) {
+			GameObject tempObject = handler.getObject().get(i);
+			if(tempObject.getID() == ID.Enemy)
+				numEnemys++;
+		}
+		if(numEnemys == 0) {
+			//Last Enemy Location
+			handler.addObject(new Items(handler.getLastEnemyX(), handler.getLastEnemyY(), ID.Items,ss));
+		}
 		handler.tick();
 		hud.tick();
 	}
