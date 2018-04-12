@@ -282,22 +282,22 @@ public class KeyInput extends KeyAdapter{
 				if(key == KeyEvent.VK_D) handler.setRight(false);
 				if (HUD.getMana() > 0){
 					if(key == KeyEvent.VK_UP) {
-						HUD.setMana(HUD.getMana()-2);
+						HUD.setMana(HUD.getMana()-1);
 						handler.setUpAim(false); 
 						handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),0,-5,ID.Attack,ss, handler));
 					}
 					if(key == KeyEvent.VK_DOWN) {
-						HUD.setMana(HUD.getMana()-2);
+						HUD.setMana(HUD.getMana()-1);
 						handler.setDownAim(false);
 						handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),0,5,ID.Attack,ss, handler));
 					}
 					if(key == KeyEvent.VK_LEFT) {
-						HUD.setMana(HUD.getMana()-2);
+						HUD.setMana(HUD.getMana()-1);
 						handler.setLeftAim(false);
 						handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),-5,0,ID.Attack,ss, handler));
 					}
 					if(key == KeyEvent.VK_RIGHT) {
-						HUD.setMana(HUD.getMana()-2);
+						HUD.setMana(HUD.getMana()-1);
 						handler.setRightAim(false);
 						handler.addObject(new Fireball(tempObject.getX(),tempObject.getY(),5,0,ID.Attack,ss, handler));
 					}

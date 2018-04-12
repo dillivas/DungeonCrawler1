@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import game.engine.Game;
+import game.objects.player.Player;
 import game.render.Render;
 
 /**
@@ -19,9 +20,14 @@ public class HUD {
 	//private GameObject gameObject;
 	private static int health = 100;
 	private static int mana = 100;
+	private Player player;
 	/**
 	 * @return the health
 	 */
+	
+	public HUD(Player player) {
+		this.player = player;
+	}
 	public static int getHealth() {
 		return health;
 	}
@@ -78,6 +84,11 @@ public class HUD {
 		g.drawImage(Render.getManaBar(),15,53,mana*3,17,null);
 	}
 	
+	public void invincibleBar(Graphics g){
+		g.setColor(Color.yellow);
+		g.fillRect(15,20,player.getCounter()*1,16);
+	}
+	
 	/**
 	 * Render the object image
 	 * @param g object graphic
@@ -89,5 +100,6 @@ public class HUD {
 
 		healthBar(g);
 		manaBar(g);
+		//invincibleBar(g);
 	}
 }

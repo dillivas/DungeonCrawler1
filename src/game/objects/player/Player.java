@@ -250,5 +250,9 @@ public class Player extends GameObject {
 			}
 		}	
 	}
+	
+	public int getCounter() {
+		return counter;
+	}
 
 }
