@@ -94,7 +94,7 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler();
 		//new Window(WIDTH, HEIGHT, "Dungeon Crawler", this);
 		BufferedImageLoader loader = new BufferedImageLoader();
-		levelSheet = loader.loadImage("/Test5.png");
+		levelSheet = loader.loadImage("/Dungeon1.png");
 		spriteSheet = loader.loadImage("/BlocksNew.png");
 		ss = new SpriteSheet(spriteSheet);
 		ms = new SpriteSheet(levelSheet);
@@ -291,12 +291,7 @@ public class Game extends Canvas implements Runnable{
 				/////////////////////////////////////////////////////////
 				//Load Level First then enemy and player
 
-				if(red == 255 && green == 0 && blue == 0) {
-					handler.addObject(new Block(xx*32, yy*32 + 96, ID.Block,ss));
-				}
-				if(red == 255 && green == 100 && blue == 0) {
-					handler.addObject(new Lava(xx*32, yy*32 + 96, ID.Lava,ss));
-				}
+				
 				if(red == 0 && green == 255 && blue == 0) {
 					handler.addObject(new Items(xx*32, yy*32 + 96, ID.Items,ss));
 				}
@@ -305,6 +300,12 @@ public class Game extends Canvas implements Runnable{
 				}
 				if(red == 255 && green == 255 && blue == 255) {
 					handler.addObject(new Ghost(xx*32, yy*32 + 96, ID.Enemy,ss, handler));
+				}
+				if(red == 255 && green == 0 && blue == 0) {
+					handler.addObject(new Block(xx*32, yy*32 + 96, ID.Block,ss));
+				}
+				if(red == 255 && green == 100 && blue == 0) {
+					handler.addObject(new Lava(xx*32, yy*32 + 96, ID.Lava,ss));
 				}
 			}
 		}

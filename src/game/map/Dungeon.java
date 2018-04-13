@@ -8,7 +8,7 @@ public class Dungeon {
 
 	//This class controls the dungeon loading 
 	
-	public static final int MAP_COL = 3, MAP_ROW = 3;
+	public static final int MAP_COL = 6, MAP_ROW = 6;
 	
 	//Hold object sprite image
 		private BufferedImage blockImage[][];
@@ -25,16 +25,16 @@ public class Dungeon {
 			setNextPlayerRoom(0);
 			
 			//Set Player Room location
-			setPlayerInRoomX(2);
-			setPlayerInRoomY(2);
+			setPlayerInRoomX(3);
+			setPlayerInRoomY(6);
 			
 			//Set Player Spawn Point in first room
 			setPlayerLocY(5*32);
 			setPlayerLocX(8*32);
 			
 			//Load the map
-			for(int row = 1; row <= MAP_ROW; row++) {
-				for(int col = 1; col <= MAP_COL; col++) {
+			for(int col = 1; col <= MAP_COL; col++) {
+				for(int row = 1; row <= MAP_ROW; row++) {
 					blockImage[col-1][row-1] = ms.grabRoom(col, row, 17, 11);
 				}
 			}
