@@ -11,6 +11,7 @@ import game.map.Dungeon;
 import game.objects.GameObject;
 import game.objects.ID;
 import game.objects.enemy.BasicEnemy;
+import game.objects.enemy.Ghost;
 import game.objects.player.Player;
 import game.objects.items.Items;
 import game.objects.structure.Block;
@@ -43,6 +44,7 @@ public class Game extends Canvas implements Runnable{
 	 * and images and sprite sheets to load in at start of game.
 	 */
 	private boolean running = false;
+
 	private static Game game;
 	private Handler handler;
 	private Thread thread;
@@ -300,6 +302,9 @@ public class Game extends Canvas implements Runnable{
 				}
 				if(red == 190 && green == 60 && blue == 190) {
 					handler.addObject(new BasicEnemy(xx*32, yy*32 + 96, ID.Enemy,ss, handler));
+				}
+				if(red == 255 && green == 255 && blue == 255) {
+					handler.addObject(new Ghost(xx*32, yy*32 + 96, ID.Enemy,ss, handler));
 				}
 			}
 		}

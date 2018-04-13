@@ -1,96 +1,136 @@
 package game.objects.enemy;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.Random;
-
-import game.engine.Game;
+import game.engine.Handler;
 import game.objects.GameObject;
 import game.objects.ID;
+import game.objects.items.Items;
+import game.objects.player.Player;
 import game.render.Render;
 import game.render.SpriteSheet;
 
 /**
- * This class controls the ghost enemy.
- * Not yet used in game and some work on its AI is still needed.
- * 
- * @author William
- * date 2/27/2018
- * class Ghost
+ * date: 1/28/2018       					*
+ * class: BasicEnemy      					*
+ *            								*
+ * The class control's a BasicEnemy object 	*
+ * 											*
+ * @author William							*
  */
 public class Ghost extends GameObject{
 
-	//Random variable for ghost movement
-	 private Random rand;
-	
-	//Ghost "steps" variable
-	private int steps = 0;
-	
-	//Ghost health
-	private static int health = 100;
+	/**
+	 * Variable of the Basic Enemy for its handler,
+	 * random set up for its movement, and its hp.
+	 * 
+	 */
+	private Handler handler;
+	private int hp = 75;
 
 	/**
-	 * BasicEnemy constructor
-	 * @param x coordinates
-	 * @param y coordinates
-	 * @param id enemy type
-	 * @param ss sprite sheet
+	 * BasicEnemy Constructor
+	 * @param x axis location of enemy
+	 * @param y axis location of enemy
+	 * @param id of object
+	 * @param ss sprite image of object
+	 * @param handler connection for object use.
 	 */
-	public Ghost(int x, int y, ID id, SpriteSheet ss) {
+	public Ghost(int x, int y, ID id, SpriteSheet ss, Handler handler) {
 		super(x, y, id, ss);
-		setSpeedX(3);
-		setSpeedY(3);
+		this.handler=handler;
 	}
 
 	/**
-	 * This is the basic enemies hit box.
-	 */
-	@Override
-	public Rectangle getBounds() {
-		return new Rectangle(getX(),getY(),32,32);
-	}
-
-	/**
-	 * Controls ghost movements
+	 * Update the object on tick
 	 */
 	@Override
 	public void tick() {
-		health = Game.clamp(health,0,12);
-        // makes the bird fly clockwise
-        if(steps%140 < 30){
-            setX(getX() + getSpeedX());
-        }
-        else if(steps%140 < 70){
-            setY(getY() + getSpeedY());
-        }
-        else if(steps%140 < 100){
-            setX(getX() - getSpeedX());
-        }
-        else if(steps%140 < 140){
-            setY(getY() - getSpeedY());
-        }
-        steps++;
-        
+		setX(getX() + getSpeedX());
+		setY(getY() + getSpeedY());
+		// determines the coordinates for the enemy to follow
+		if (Player.getXcoor() > getX()) {
+			setSpeedX(2);
+		}
+		if (Player.getXcoor() < getX()) {
+			setSpeedX(-2);
+		}
+		if (Player.getYcoor() > getY()) {
+			setSpeedY(2);
+		}
+		if (Player.getYcoor() < getY()) {
+			setSpeedY(-2);
+		}
+
+		//AI behavior found on:
+		//https://www.youtube.com/watch?v=JBGCCAv76YI&t=1s
+		// following code did not use link
+		for(int i = 0; i < handler.getObject().size(); i++) {
+			GameObject tempObject = handler.getObject().get(i);	
+			// prevents collision with the walls of the room
+			/*if(tempObject.getID() == ID.Block) {
+				if(getBounds().intersects(tempObject.getBounds())) {
+					if (getX() < Player.getXcoor()+32 && (getX() > Player.getXcoor()-32)) {
+						setSpeedY(getSpeedY()*-1);
+					}
+		
+					else {
+						setSpeedX(getSpeedX()*-1);
+					}
+				}
+			}*/
+			//Collision effects on enemy
+			if(tempObject.getID() == ID.Attack) {
+				if(getBounds().intersects(tempObject.getBounds())) {
+					hp -= 25;
+					//Removes fireball
+					handler.removeObject(tempObject);
+				}
+			}
+			/*if(tempObject.getID() == ID.Lava) {
+				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Lava)) {
+					hp -= 1;
+
+				}
+			}*/
+		}
+		if(hp <= 0) {
+			handler.removeObject(this);
+			int numEnemys = 0;
+			
+			for(int i = 0;i < handler.getObject().size(); i++) {
+				GameObject tempObject = handler.getObject().get(i);
+				if(tempObject.getID() == ID.Enemy)
+					numEnemys++;
+			}
+			if(numEnemys == 0) {
+				//Last Enemy Location
+				handler.setLastEnemyAlive(true) ;
+				handler.setLastEnemyX(getX());
+				handler.setLastEnemyY(getY());
+			}
+		}
 	}
 
 	/**
-	 * Controls BasicEnemy rendering
+	 * Add enemy hitbox
 	 */
+	@Override
+	public Rectangle getBounds() {
+		return new Rectangle(getX() ,getY() ,32,32);//20
+	}
+
+	/**
+	 * Add second hit box for enemy AI pathing
+	 * @return rectangle for hitbox
+	 */
+	public Rectangle getBoundsWall() {
+		return new Rectangle(getX() - 16,getY() - 16,64,64);
+	}
+
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Render.getGhostImage(),getX(),getY(),50,50, null);
 	}
-	/**
-	 * Display ghost graphic
-	 * @param g graphic
-	 */
-	public void health(Graphics g) {
-		  g.setColor(Color.gray);
-		  g.fillRect(200 , 15, 120, 32);
-		  g.setColor(Color.red);
-		  g.fillRect(200 , 15, health * 10, 32);
-		  g.setColor(Color.white);
-		  g.drawRect(200 , 15, 120, 32);
-	 }
+
 }

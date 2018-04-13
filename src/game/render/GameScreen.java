@@ -216,6 +216,7 @@ public class GameScreen{
 				}
 				else {
 					Player.getPouch().remove(total);
+					KeyInput.setSpace(false);
 				}
 				if(Player.getPouch().size() == 0) {
 					count--;

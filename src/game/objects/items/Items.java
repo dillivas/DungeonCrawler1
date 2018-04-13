@@ -24,7 +24,7 @@ public class Items extends GameObject{
 	private static BufferedImage invincibilityPotion;
 	private BufferedImage chest;
 	private Random rand;
-	private static int q = 0;
+	private int q = 0;
 	private String potionType;
 
 	/**
@@ -63,7 +63,7 @@ public class Items extends GameObject{
 		}
 		return q;
 	}
-	public static int getIndex() {
+	public int getIndex() {
 		return q;
 	}
 
@@ -95,7 +95,7 @@ public class Items extends GameObject{
 	 * loads the item's images
 	 * @param SpriteSheet ss
 	 */
-	public void loadImage(SpriteSheet ss) {
+	public static void loadImage(SpriteSheet ss) {
 		healthPotion = ss.grabImage(7,1,32,32);
 		manaPotion = ss.grabImage(8,1,32,32); 
 		invincibilityPotion = ss.grabImage(9,1,32,32);
@@ -106,13 +106,13 @@ public class Items extends GameObject{
 	 * @param String s
 	 */
 	public static BufferedImage getImage(String s) {
-		if (s == "healthPotion") {
+		if (s .equals("healthPotion")) {
 			return healthPotion;
 		}
-		if (s == "manaPotion") {
+		if (s .equals("manaPotion")) {
 			return manaPotion;
 		}
-		if (s == "invincibility") {
+		if (s.equals("invincibility")) {
 			return invincibilityPotion;
 		}
 		else {
@@ -124,13 +124,13 @@ public class Items extends GameObject{
 	 * @param String s
 	 */
 	public static String getString(String s) {
-		if (s == "healthPotion") {
+		if (s .equals("healthPotion")) {
 			return "Health potion: returns the player to full health";
 		}
-		if (s == "manaPotion") {
+		if (s .equals("manaPotion")) {
 			return "Mana potion: returns the player to full mana";
 		}
-		if (s == "invincibility") {
+		if (s.equals("invincibility")) {
 			return "Shield: provides the user invincibility for a few hits";
 		}
 		else {

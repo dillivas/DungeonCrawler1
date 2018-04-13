@@ -26,7 +26,7 @@ public class BasicEnemy extends GameObject{
 	 * 
 	 */
 	private Handler handler;
-	private int hp = 100;
+	private int hp = 125;
 
 	/**
 	 * BasicEnemy Constructor

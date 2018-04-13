@@ -34,13 +34,13 @@ public class ItemSpecs extends Items {
 	 * @param String s
 	 */
 	public static void getSpecs(String s) {
-		if (s =="healthPotion") {
+		if (s.equals("healthPotion")) {
 			healthPotion();
 		}
-		if (s =="manaPotion") {
+		if (s.equals("manaPotion")) {
 			manaPotion();
 		}
-		if (s =="invincibility") {
+		if (s.equals("invincibility")) {
 			invincibility();
 		}
 	}
