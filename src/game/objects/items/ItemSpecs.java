@@ -66,7 +66,7 @@ public class ItemSpecs extends Items {
 	 * sets the invincible boolean
 	 * @param boolean b
 	 */
-	private static void setInvincible(boolean b) {
+	public static void setInvincible(boolean b) {
 		invincible = b;
 	}
 	/**

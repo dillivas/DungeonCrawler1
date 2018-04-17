@@ -26,7 +26,7 @@ public class Player extends GameObject {
 
 	public static final int TOP = 1, RIGHT = 2, BOTTOM = 3, LEFT = 4;
 	public static final int TOPSCREEN = 96, LEFTSCREEN = 0, BOTTOMSCREEN = 478, RIGHTSCREEN = 550;
-	
+
 	//Store handler for later use
 	private Handler handler;
 	private static ArrayList<String> pouch;
@@ -43,7 +43,9 @@ public class Player extends GameObject {
 	private static int xCoor;
 	private Dungeon dungeon;
 	private Game game;
-	
+	private int count = 0;
+	private int door;
+
 	/**
 	 * Player constructor
 	 * @param x coordinate of player
@@ -85,7 +87,7 @@ public class Player extends GameObject {
 		if(handler.getLeft()) setSpeedX(-3);
 		else if(!handler.getRight()) setSpeedX(0);
 	}
-	
+
 	/**
 	 * This is the Players x coordinate.
 	 * @return xCoor
@@ -114,7 +116,28 @@ public class Player extends GameObject {
 					setY(getY() + getSpeedY() * -1);
 				}
 			}
+			if(tempObject.getID() == ID.Door) {
+				if(getBounds().intersects(tempObject.getBounds())) {
+					if(pouch.contains("key")) {
+						handler.removeObject(tempObject);
+						pouch.remove("key");
+						door++;
+					}
+					else {
+						setX(getX() + getSpeedX() * -1);
+						setY(getY() + getSpeedY() * -1);
+					}
+				}
+			}
 
+			if(tempObject.getID() == ID.BossAttack) {
+				if(getBounds().intersects(tempObject.getBounds())) {
+					HUD.setHealth(HUD.getHealth() - 1);
+					
+					//Removes fireball
+					handler.removeObject(tempObject);
+				}
+			}
 			if(tempObject.getID() == ID.Enemy) {
 
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Enemy)) {
@@ -123,6 +146,8 @@ public class Player extends GameObject {
 					}
 					else {
 						HUD.setHealth(HUD.getHealth() - 1);
+						ItemSpecs.setInvincible(false);
+						counter = 100;
 					}
 				}
 			}
@@ -132,45 +157,82 @@ public class Player extends GameObject {
 					HUD.setHealth(HUD.getHealth() - 1);
 				}
 			}
+			if(tempObject.getID() == ID.Key) {
+				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Key)) {
+					if (pouch.size() > 7) {
+						pouch.remove(7);
+					}else {
+						pouch.add("key");
+					}
+
+					handler.removeObject(tempObject);
+				}
+			}
 			if(tempObject.getID() == ID.Items) {
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Items)) {
 					Items item = (Items) tempObject;	
-					pouch.add(item.getItemType());
+					if (pouch.size() < 8) {
+						pouch.add(item.getItemType());
+					}
+
 					handler.removeObject(tempObject);
-					
 				}
 			}
 		}
 		if (getXcoor() < LEFTSCREEN + 10) {
-			setX(RIGHTSCREEN - 10);
+		/*if(door > 0) {
+				setX(RIGHTSCREEN - 20);
+				count = 0;
+			}
+			else {*/
+				setX(RIGHTSCREEN - 10);
+			//}
 			//dungeon.setPlayerLocX(RIGHTSCREEN - 10);
 			dungeon.setNextPlayerRoom(LEFT);
 			dungeon.setLeftRoom(true);
 			//game.loadNewRoom();
 		}
 		if (getXcoor() > RIGHTSCREEN - 10) {
-			setX(LEFTSCREEN + 10);
+		/*	if(door > 0) {
+				setX(LEFTSCREEN + 20);
+				count = 0;
+			}*/
+			//else {
+				setX(LEFTSCREEN + 10);
+			//}
 			//dungeon.setPlayerLocX(LEFTSCREEN + 10);
 			dungeon.setNextPlayerRoom(RIGHT);
 			dungeon.setLeftRoom(true);
 			//game.loadNewRoom();
 		}
 		if (getYcoor() > BOTTOMSCREEN - 10) {
-			setY(TOPSCREEN + 10);
+			if(door > 0) {
+				setY(TOPSCREEN + 20);
+				count = 0;
+			}
+			else {
+				setY(TOPSCREEN + 10);
+			}
 			//dungeon.setPlayerLocY(TOPSCREEN + 10);
 			dungeon.setNextPlayerRoom(BOTTOM);
 			dungeon.setLeftRoom(true);
 			//game.loadNewRoom();
 		}
 		if (getYcoor() < TOPSCREEN + 10) {
-			setY(BOTTOMSCREEN - 10);
+			if(door > 0) {
+				setY(BOTTOMSCREEN -90);
+				door = 0;
+			}
+			else {
+				setY(BOTTOMSCREEN - 10);
+			}
 			//dungeon.setPlayerLocY(BOTTOMSCREEN - 10);
 			dungeon.setNextPlayerRoom(TOP);
 			dungeon.setLeftRoom(true);
 			//game.loadNewRoom();
 		}
 	}
-	
+
 	/**
 	 * This is the Players item box.
 	 * @return Rectangle returns pouch
@@ -178,13 +240,13 @@ public class Player extends GameObject {
 	public static ArrayList<String> getPouch() {
 		return pouch;
 	}
-	
+
 	/**
 	 * This is the Players hit box.
 	 * @return Rectangle returns hit box
 	 */
 	public Rectangle getBounds() {
-		return new Rectangle(getX(),getY(),30,30);// was 32, but he was too wide to fit some corners
+		return new Rectangle(getX(),getY(),28,28);// was 32, but he was too wide to fit some corners
 	}
 
 	/**
@@ -250,7 +312,7 @@ public class Player extends GameObject {
 			}
 		}	
 	}
-	
+
 	public int getCounter() {
 		return counter;
 	}

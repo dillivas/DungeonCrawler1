@@ -11,10 +11,13 @@ import game.map.Dungeon;
 import game.objects.GameObject;
 import game.objects.ID;
 import game.objects.enemy.BasicEnemy;
+import game.objects.enemy.BossEnemy;
 import game.objects.enemy.Ghost;
 import game.objects.player.Player;
 import game.objects.items.Items;
+import game.objects.items.Key;
 import game.objects.structure.Block;
+import game.objects.structure.Door;
 import game.objects.structure.InvisibleBlock;
 import game.objects.structure.Lava;
 import game.render.BufferedImageLoader;
@@ -94,7 +97,7 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler();
 		//new Window(WIDTH, HEIGHT, "Dungeon Crawler", this);
 		BufferedImageLoader loader = new BufferedImageLoader();
-		levelSheet = loader.loadImage("/Dungeon1.png");
+		levelSheet = loader.loadImage("/Dungeon2.png");
 		spriteSheet = loader.loadImage("/BlocksNew.png");
 		ss = new SpriteSheet(spriteSheet);
 		ms = new SpriteSheet(levelSheet);
@@ -291,7 +294,12 @@ public class Game extends Canvas implements Runnable{
 				/////////////////////////////////////////////////////////
 				//Load Level First then enemy and player
 
-				
+				if(red == 255 && green == 0 && blue == 0) {
+					handler.addObject(new Block(xx*32, yy*32 + 96, ID.Block,ss));
+				}
+				if(red == 255 && green == 100 && blue == 0) {
+					handler.addObject(new Lava(xx*32, yy*32 + 96, ID.Lava,ss));
+				}
 				if(red == 0 && green == 255 && blue == 0) {
 					handler.addObject(new Items(xx*32, yy*32 + 96, ID.Items,ss));
 				}
@@ -301,11 +309,14 @@ public class Game extends Canvas implements Runnable{
 				if(red == 255 && green == 255 && blue == 255) {
 					handler.addObject(new Ghost(xx*32, yy*32 + 96, ID.Enemy,ss, handler));
 				}
-				if(red == 255 && green == 0 && blue == 0) {
-					handler.addObject(new Block(xx*32, yy*32 + 96, ID.Block,ss));
+				if(red == 255 && green == 242 && blue == 0) {
+					handler.addObject(new Key(xx*32, yy*32 + 96, ID.Key,ss));//yellow
 				}
-				if(red == 255 && green == 100 && blue == 0) {
-					handler.addObject(new Lava(xx*32, yy*32 + 96, ID.Lava,ss));
+				if(red == 185 && green == 122 && blue == 87) {
+					handler.addObject(new Door(xx*32, yy*32 + 96, ID.Door,ss)); //brown
+				}
+				if(red == 34 && green == 177 && blue == 76) {
+					handler.addObject(new BossEnemy(xx*32, yy*32 + 96, ID.Enemy,ss,handler));//green
 				}
 			}
 		}

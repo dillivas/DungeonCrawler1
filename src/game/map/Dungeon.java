@@ -26,7 +26,7 @@ public class Dungeon {
 			
 			//Set Player Room location
 			setPlayerInRoomX(3);
-			setPlayerInRoomY(6);
+			setPlayerInRoomY(5);
 			
 			//Set Player Spawn Point in first room
 			setPlayerLocY(5*32);

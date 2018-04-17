@@ -42,6 +42,8 @@ public class Render {
 	
 	private static BufferedImage enemyImage;
 	private static BufferedImage ghostImage;
+	private static BufferedImage bossImage;
+
 	
 	private static BufferedImage fireball;
 	private static BufferedImage instructions;
@@ -62,6 +64,8 @@ public class Render {
 	private static BufferedImage healthBar;
 	private static BufferedImage manaBar;
 	private static BufferedImage barOutline;
+	private static BufferedImage winRestart;
+	private static BufferedImage winQuit;
 
 	
 	/**
@@ -427,6 +431,20 @@ public class Render {
 	public static void setGhostImage(BufferedImage ghostImage) {
 		Render.ghostImage = ghostImage;
 	}
+	/**
+	 * @return the ghostImage
+	 */
+	public static BufferedImage getBossImage() {
+		return bossImage;
+	}
+
+	/**
+	 * @param ghostImage the ghostImage to set
+	 */
+	public static void setBossImage(BufferedImage bossImage) {
+		Render.bossImage = bossImage;
+	}
+
 
 	/**
 	 * @return the fireball
@@ -498,6 +516,34 @@ public class Render {
 	 */
 	public static void setGameQuit(BufferedImage gameQuit) {
 		Render.gameQuit = gameQuit;
+	}
+	
+	/**
+	 * @return the win Quit
+	 */
+	public static BufferedImage getWinQuit() {
+		return winQuit;
+	}
+
+	/**
+	 * @param winQuit the winQuit to set
+	 */
+	public static void setWinQuit(BufferedImage winQuit) {
+		Render.winQuit = winQuit;
+	}
+	
+	/**
+	 * @return the winRestart
+	 */
+	public static BufferedImage getWinRestart() {
+		return winRestart;
+	}
+
+	/**
+	 * @param gameQuit the gameQuit to set
+	 */
+	public static void setWinRestart(BufferedImage winRestart) {
+		Render.winRestart = winRestart;
 	}
 
 	/**
@@ -612,9 +658,13 @@ public class Render {
 			gameQuit = ImageIO.read(new File("src/Images/QuitGame.PNG"));
 			gameStart = ImageIO.read(new File("src/Images/GameStart.PNG"));
 			startQuit = ImageIO.read(new File("src/Images/StartQuit.PNG"));
+			winRestart = ImageIO.read(new File("src/Images/winRestart.PNG"));
+			winQuit = ImageIO.read(new File("src/Images/winQuit.PNG"));
 
 			enemyImage = ImageIO.read(new File("src/Images/blob.gif"));
 			ghostImage = ImageIO.read(new File("src/Images/ghost.gif"));
+			bossImage = ImageIO.read(new File("src/Images/BossEnemy.png"));
+
 
 			fireball = ImageIO.read(new File("src/Images/fireball.gif"));
 			healthPotion = ImageIO.read(new File("src/itemImages/healthPotion.PNG"));

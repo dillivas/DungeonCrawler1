@@ -13,5 +13,8 @@ public enum ID {
 	 Attack(),
 	 Lava(),
 	 Menu(), 
-	 Items();
+	 Items(), 
+	 BossAttack(), 
+	 Door(), 
+	 Key();
 }
