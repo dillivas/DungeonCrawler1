@@ -8,7 +8,7 @@ public class Dungeon {
 
 	//This class controls the dungeon loading 
 	
-	public static final int MAP_COL = 6, MAP_ROW = 6;
+	public static final int MAP_COL = 4, MAP_ROW = 4;
 	
 	//Hold object sprite image
 		private BufferedImage blockImage[][];
@@ -25,8 +25,8 @@ public class Dungeon {
 			setNextPlayerRoom(0);
 			
 			//Set Player Room location
-			setPlayerInRoomX(3);
-			setPlayerInRoomY(6);
+			setPlayerInRoomX(2);
+			setPlayerInRoomY(4);
 			
 			//Set Player Spawn Point in first room
 			setPlayerLocY(5*32);
