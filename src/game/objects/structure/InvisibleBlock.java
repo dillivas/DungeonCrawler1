@@ -21,7 +21,7 @@ public class InvisibleBlock extends GameObject{
 		 */
 		public InvisibleBlock(int x, int y, ID id, SpriteSheet ss) {
 			super(x,y,id, ss);
-			//blockImage = ss.grabImage(2,1,32,32);
+			blockImage = ss.grabImage(2,1,32,32);
 		}
 		/**
 		 * Update the object on tick
@@ -37,7 +37,7 @@ public class InvisibleBlock extends GameObject{
 		@Override
 		public void render(Graphics g) {
 			/*g.drawImage(blockImage, getX(), getY(),Change x size,Change x size, null);*/
-			//g.drawImage(blockImage, getX(), getY(),32,32, null);
+			g.drawImage(blockImage, getX(), getY(),32,32, null);
 		}
 		
 		/**

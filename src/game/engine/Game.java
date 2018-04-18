@@ -318,6 +318,9 @@ public class Game extends Canvas implements Runnable{
 				if(red == 34 && green == 177 && blue == 76) {
 					handler.addObject(new BossEnemy(xx*32, yy*32 + 96, ID.Enemy,ss,handler));//green
 				}
+				if(red == 195 && green == 195 && blue == 195) {
+					handler.addObject(new InvisibleBlock(xx*32, yy*32 + 96, ID.InvisibleBlock,ss));//green
+				}
 			}
 		}
 		//handler.addObject(new Player(dungeon.getPlayerLocX(), dungeon.getPlayerLocY() + 96, ID.Player,ss, handler, dungeon, this));

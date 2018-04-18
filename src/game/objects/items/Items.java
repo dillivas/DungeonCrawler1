@@ -133,6 +133,9 @@ public class Items extends GameObject{
 		if (s.equals("invincibility")) {
 			return "Shield: provides the user invincibility for a few hits";
 		}
+		if (s.equals("key")) {
+			return "Key: opens a door";
+		}
 		else {
 			return null;
 		}

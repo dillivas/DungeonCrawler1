@@ -54,6 +54,6 @@ public class Block extends GameObject{
 	 */
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(getX(),getY(),32,32);
+		return new Rectangle(getX(),getY(),30,30);
 	}
 }

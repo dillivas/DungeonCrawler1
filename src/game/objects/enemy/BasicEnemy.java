@@ -68,7 +68,7 @@ public class BasicEnemy extends GameObject{
 		for(int i = 0; i < handler.getObject().size(); i++) {
 			GameObject tempObject = handler.getObject().get(i);	
 			// prevents collision with the walls of the room
-			if(tempObject.getID() == ID.Block) {
+			if(tempObject.getID() == ID.Block ||tempObject.getID() == ID.Door) {
 				if(getBounds().intersects(tempObject.getBounds())) {
 					if (getX() < Player.getXcoor()+32 && (getX() > Player.getXcoor()-32)) {
 						setSpeedY(getSpeedY()*-1);
@@ -78,6 +78,7 @@ public class BasicEnemy extends GameObject{
 						setSpeedX(getSpeedX()*-1);
 					}
 				}
+	
 			}
 			//Collision effects on enemy
 			if(tempObject.getID() == ID.Attack) {

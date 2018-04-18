@@ -50,16 +50,16 @@ public class Ghost extends GameObject{
 		setY(getY() + getSpeedY());
 		// determines the coordinates for the enemy to follow
 		if (Player.getXcoor() > getX()) {
-			setSpeedX(2);
+			setSpeedX(1);
 		}
 		if (Player.getXcoor() < getX()) {
-			setSpeedX(-2);
+			setSpeedX(-1);
 		}
 		if (Player.getYcoor() > getY()) {
-			setSpeedY(2);
+			setSpeedY(1);
 		}
 		if (Player.getYcoor() < getY()) {
-			setSpeedY(-2);
+			setSpeedY(-1);
 		}
 
 		//AI behavior found on:

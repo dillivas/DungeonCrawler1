@@ -4,8 +4,10 @@ import java.awt.Graphics;
 import game.controls.KeyInput;
 import game.engine.Game;
 import game.hud.HUD;
+import game.objects.enemy.BossEnemy;
 import game.objects.items.ItemSpecs;
 import game.objects.items.Items;
+import game.objects.items.Key;
 import game.objects.player.Player;
 
 /**
@@ -207,7 +209,7 @@ public class GameScreen{
 			g.drawImage(Render.getPauseItem(),0,0,Game.WIDTH-5,Game.HEIGHT-30, null);
 			g.drawImage(Render.getBorder(),BORDER_X + (61*total),BORDER_Y,BORDER_WIDTH,BORDER_HEIGHT, null);
 			g.drawString(Items.getString(Player.getPouch().get(total)),25, BORDER_Y +110);
-			if(KeyInput.getSpace() == true) { 
+			if(KeyInput.getSpace() == true && Player.getPouch().get(total) != "key") { 
 				ItemSpecs.getSpecs(Player.getPouch().get(total));
 				if(Player.getPouch().size() == total+1) {
 					Player.getPouch().remove(total);
@@ -234,6 +236,7 @@ public class GameScreen{
 				System.out.print("Empty list");
 			} 
 			else {
+				g.drawImage(Key.getImage(Player.getPouch().get(k)),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
 				g.drawImage(Items.getImage(Player.getPouch().get(k)),IMAGE_X + (61*k),IMAGE_Y,IMAGE_WIDTH,IMAGE_HEIGHT, null);
 			}
 		}
@@ -277,6 +280,33 @@ public class GameScreen{
 				//newGame
 				if(KeyInput.getSpace() == true) {
 					Game.setRestart(true);
+				}
+			}
+		}
+		/**
+		 * Controls the win screen
+		 */
+		if(BossEnemy.getDead()== true) {
+			g.drawImage(Render.getWinQuit(),0,0,Game.WIDTH,Game.HEIGHT, null);
+			if(KeyInput.getUp() == false && (KeyInput.getDown() == false)) {
+				if(KeyInput.getSpace() == true) {
+					System.exit(1);
+				}
+			}
+			if(KeyInput.getUp() == true) {
+				g.drawImage(Render.getWinQuit(),0,0,Game.WIDTH,Game.HEIGHT, null);
+
+				if(KeyInput.getSpace() == true) {
+					System.exit(1);
+				}
+			}
+			//Restart selected
+			if (KeyInput.getDown() == true){
+				g.drawImage(Render.getWinRestart(),0,0,Game.WIDTH,Game.HEIGHT, null);
+				//newGame
+				if(KeyInput.getSpace() == true) {
+					Game.setRestart(true);
+					BossEnemy.setDead(false);
 				}
 			}
 		}

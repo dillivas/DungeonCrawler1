@@ -34,17 +34,25 @@ public class BossEnemy extends GameObject {
 	@Override
 	public void tick() {
 
-		if(steps%200 < 100){
+		if(steps%230< 115){
 			setY(getY() + 2);
 		}
 
-		else if(steps%100 < 200){
+		else if(steps%230 < 230){
 			setY(getY() - 2);
 		}
 		steps++;
 		rate++;
 		if(rate ==3) {
-			handler.addObject(new BossFire(getX(),getY(),-5,0,ID.BossAttack,ss, handler));
+			if(steps%2==0) {
+			handler.addObject(new BossFire(getX(),getY(),-5,2,ID.BossAttack,ss, handler));
+			handler.addObject(new BossFire(getX(),getY(),-5,-1,ID.BossAttack,ss, handler));
+			}
+			else {
+				handler.addObject(new BossFire(getX(),getY(),-5,0,ID.BossAttack,ss, handler));
+				handler.addObject(new BossFire(getX(),getY(),-5,1,ID.BossAttack,ss, handler));
+
+			}
 			rate = 0;
 		}
 

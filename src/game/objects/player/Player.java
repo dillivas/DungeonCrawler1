@@ -145,7 +145,7 @@ public class Player extends GameObject {
 						counter--;
 					}
 					else {
-						HUD.setHealth(HUD.getHealth() - 1);
+						//HUD.setHealth(HUD.getHealth() - 1);
 						ItemSpecs.setInvincible(false);
 						counter = 100;
 					}
@@ -154,7 +154,7 @@ public class Player extends GameObject {
 			if(tempObject.getID() == ID.Lava) {
 
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Lava)) {
-					HUD.setHealth(HUD.getHealth() - 1);
+					//HUD.setHealth(HUD.getHealth() - 1);
 				}
 			}
 			if(tempObject.getID() == ID.Key) {
@@ -180,26 +180,26 @@ public class Player extends GameObject {
 			}
 		}
 		if (getXcoor() < LEFTSCREEN + 10) {
-		/*if(door > 0) {
-				setX(RIGHTSCREEN - 20);
+		if(door > 0) {
+				setX(RIGHTSCREEN - 90);
 				count = 0;
 			}
-			else {*/
+			else {
 				setX(RIGHTSCREEN - 10);
-			//}
+			}
 			//dungeon.setPlayerLocX(RIGHTSCREEN - 10);
 			dungeon.setNextPlayerRoom(LEFT);
 			dungeon.setLeftRoom(true);
 			//game.loadNewRoom();
 		}
 		if (getXcoor() > RIGHTSCREEN - 10) {
-		/*	if(door > 0) {
-				setX(LEFTSCREEN + 20);
+			if(door > 0) {
+				setX(LEFTSCREEN + 90);
 				count = 0;
-			}*/
-			//else {
+			}
+			else {
 				setX(LEFTSCREEN + 10);
-			//}
+			}
 			//dungeon.setPlayerLocX(LEFTSCREEN + 10);
 			dungeon.setNextPlayerRoom(RIGHT);
 			dungeon.setLeftRoom(true);
@@ -207,7 +207,7 @@ public class Player extends GameObject {
 		}
 		if (getYcoor() > BOTTOMSCREEN - 10) {
 			if(door > 0) {
-				setY(TOPSCREEN + 20);
+				setY(TOPSCREEN + 90);
 				count = 0;
 			}
 			else {

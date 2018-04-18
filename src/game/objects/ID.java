@@ -16,5 +16,6 @@ public enum ID {
 	 Items(), 
 	 BossAttack(), 
 	 Door(), 
-	 Key();
+	 Key(),
+	 InvisibleBlock;
 }
