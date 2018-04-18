@@ -145,7 +145,7 @@ public class Player extends GameObject {
 						counter--;
 					}
 					else {
-						//HUD.setHealth(HUD.getHealth() - 1);
+						HUD.setHealth(HUD.getHealth() - 1);
 						ItemSpecs.setInvincible(false);
 						counter = 100;
 					}
@@ -154,7 +154,7 @@ public class Player extends GameObject {
 			if(tempObject.getID() == ID.Lava) {
 
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Lava)) {
-					//HUD.setHealth(HUD.getHealth() - 1);
+					HUD.setHealth(HUD.getHealth() - 1);
 				}
 			}
 			if(tempObject.getID() == ID.Key) {
