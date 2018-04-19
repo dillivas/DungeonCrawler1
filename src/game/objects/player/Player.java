@@ -154,13 +154,21 @@ public class Player extends GameObject {
 			if(tempObject.getID() == ID.Lava) {
 
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Lava)) {
-					HUD.setHealth(HUD.getHealth() - 1);
+					if(ItemSpecs.getInvincible() == true && counter > 0) {
+						counter--;
+					}
+					else {
+						HUD.setHealth(HUD.getHealth() - 1);
+						ItemSpecs.setInvincible(false);
+						counter = 100;
+					}
 				}
 			}
 			if(tempObject.getID() == ID.Key) {
 				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Key)) {
 					if (pouch.size() > 7) {
 						pouch.remove(7);
+						pouch.add("key");
 					}else {
 						pouch.add("key");
 					}

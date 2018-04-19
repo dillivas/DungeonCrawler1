@@ -432,14 +432,14 @@ public class Render {
 		Render.ghostImage = ghostImage;
 	}
 	/**
-	 * @return the ghostImage
+	 * @return the bossImage
 	 */
 	public static BufferedImage getBossImage() {
 		return bossImage;
 	}
 
 	/**
-	 * @param ghostImage the ghostImage to set
+	 * @param bossImage the bossImage to set
 	 */
 	public static void setBossImage(BufferedImage bossImage) {
 		Render.bossImage = bossImage;
@@ -662,7 +662,7 @@ public class Render {
 			winQuit = ImageIO.read(new File("src/Images/winQuit.PNG"));
 
 			enemyImage = ImageIO.read(new File("src/Images/blob.gif"));
-			ghostImage = ImageIO.read(new File("src/Images/ghost.gif"));
+			ghostImage = ImageIO.read(new File("src/Images/ghost.png"));
 			bossImage = ImageIO.read(new File("src/Images/BossEnemy.png"));
 
 
