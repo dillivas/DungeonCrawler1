@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import game.engine.Handler;
 import game.objects.GameObject;
 import game.objects.ID;
-import game.objects.items.Items;
 import game.objects.player.Player;
 import game.render.Render;
 import game.render.SpriteSheet;
@@ -62,23 +61,9 @@ public class Ghost extends GameObject{
 			setSpeedY(-1);
 		}
 
-		//AI behavior found on:
-		//https://www.youtube.com/watch?v=JBGCCAv76YI&t=1s
-		// following code did not use link
 		for(int i = 0; i < handler.getObject().size(); i++) {
 			GameObject tempObject = handler.getObject().get(i);	
-			// prevents collision with the walls of the room
-			/*if(tempObject.getID() == ID.Block) {
-				if(getBounds().intersects(tempObject.getBounds())) {
-					if (getX() < Player.getXcoor()+32 && (getX() > Player.getXcoor()-32)) {
-						setSpeedY(getSpeedY()*-1);
-					}
 		
-					else {
-						setSpeedX(getSpeedX()*-1);
-					}
-				}
-			}*/
 			//Collision effects on enemy
 			if(tempObject.getID() == ID.Attack) {
 				if(getBounds().intersects(tempObject.getBounds())) {
@@ -87,12 +72,6 @@ public class Ghost extends GameObject{
 					handler.removeObject(tempObject);
 				}
 			}
-			/*if(tempObject.getID() == ID.Lava) {
-				if(getBounds().intersects(tempObject.getBounds()) && (tempObject.getID() == ID.Lava)) {
-					hp -= 1;
-
-				}
-			}*/
 		}
 		if(hp <= 0) {
 			handler.removeObject(this);
@@ -128,6 +107,9 @@ public class Ghost extends GameObject{
 		return new Rectangle(getX() - 16,getY() - 16,64,64);
 	}
 
+	/**
+	 * Render the object on screen
+	 */
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Render.getGhostImage(),getX(),getY(),50,50, null);

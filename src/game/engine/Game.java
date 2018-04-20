@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import game.controls.KeyInput;
 import game.hud.HUD;
 import game.map.Dungeon;
-import game.objects.GameObject;
 import game.objects.ID;
 import game.objects.enemy.BasicEnemy;
 import game.objects.enemy.BossEnemy;
@@ -37,7 +36,6 @@ public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = 665215786302647934L;
 
 	//Window Size settings
-	//public static final int WIDTH = 640, HEIGHT = 512;
 	public static final int WIDTH = 550, HEIGHT = 478;
 	public static final int TOP = 1, RIGHT = 2, BOTTOM = 3, LEFT = 4;
 
@@ -56,10 +54,10 @@ public class Game extends Canvas implements Runnable{
 	//private Camera camera;
 	private GameScreen gameScreen;
 	private SpriteSheet ss;
-	private SpriteSheet is;
+	//private SpriteSheet is;
 	private SpriteSheet ms;
 	private BufferedImage spriteSheet = null;
-	private BufferedImage itemSheet = null;
+	//private BufferedImage itemSheet = null;
 	private BufferedImage levelSheet = null;
 
 	private Dungeon dungeon = null;
@@ -92,6 +90,9 @@ public class Game extends Canvas implements Runnable{
 		running = true;
 	}
 	
+	/**
+	 * Function to set up the game and load assets into it.
+	 */
 	public void setup() {
 		Render.load();
 		handler = new Handler();
@@ -323,9 +324,12 @@ public class Game extends Canvas implements Runnable{
 				}
 			}
 		}
-		//handler.addObject(new Player(dungeon.getPlayerLocX(), dungeon.getPlayerLocY() + 96, ID.Player,ss, handler, dungeon, this));
 	}
 	
+
+	/**
+	 * Load the new room based on the players current location.
+	 */
 	public void loadNewRoom(){
 		
 		if(dungeon.getNextPlayerRoom() != 0) {
@@ -351,10 +355,21 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 	
+	/*
+	 * Get the value of window width
+	 * (non-Javadoc)
+	 * @see java.awt.Component#getWidth()
+	 */
 	public int getWidth() {
 		return WIDTH;
 	}
 	
+
+	/*
+	 * Get the value of window height
+	 * (non-Javadoc)
+	 * @see java.awt.Component#getHeight()
+	 */
 	public int getHeight() {
 		return HEIGHT;
 	}

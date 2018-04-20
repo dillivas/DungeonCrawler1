@@ -2,27 +2,34 @@ package game.objects.enemy;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.Random;
-
 import game.engine.Handler;
 import game.objects.GameObject;
 import game.objects.ID;
-import game.objects.attack.Fireball;
 import game.objects.bossAttack.BossFire;
-import game.objects.player.Player;
 import game.render.Render;
 import game.render.SpriteSheet;
 
 public class BossEnemy extends GameObject {
 
+	//Boss Sprite Sheet
 	private SpriteSheet ss;
 
+	//Boss Variables
 	private Handler handler;
 	private int steps = 0;
 	private int hp = 1000;
 	private int rate;
 	private static boolean dead = false;
 
+	/**
+	 * Boss Constructer
+	 * 
+	 * @param x boss location (X)
+	 * @param y boss location (Y)
+	 * @param id boss ID type
+	 * @param ss Boss spread sheet image
+	 * @param handler gives boss access to handler
+	 */
 	public BossEnemy(int x, int y, ID id, SpriteSheet ss, Handler handler) {
 		super(x, y, id, ss);
 		this.handler=handler;
@@ -31,6 +38,9 @@ public class BossEnemy extends GameObject {
 		setSpeedY(4);
 	}
 
+	/**
+	 * Boss action during game tick
+	 */
 	@Override
 	public void tick() {
 
@@ -57,17 +67,11 @@ public class BossEnemy extends GameObject {
 		}
 
 
-
-		//AI behavior found on:
-			//https://www.youtube.com/watch?v=JBGCCAv76YI&t=1s
-			// following code did not use link
 			for(int i = 0; i < handler.getObject().size(); i++) {
 				GameObject tempObject = handler.getObject().get(i);	
 
-				//Collision effects on enemy
-				//handler.addObject(new BossFire(getX(),getY(),0,-5,ID.Attack,ss, handler));
 
-
+				//Hit by player Attack
 				if(tempObject.getID() == ID.Attack) {
 					if(getBounds().intersects(tempObject.getBounds())) {
 						hp -= 15;

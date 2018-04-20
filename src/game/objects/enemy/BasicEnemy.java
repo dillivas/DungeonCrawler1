@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import game.engine.Handler;
 import game.objects.GameObject;
 import game.objects.ID;
-import game.objects.items.Items;
 import game.objects.player.Player;
 import game.render.Render;
 import game.render.SpriteSheet;
