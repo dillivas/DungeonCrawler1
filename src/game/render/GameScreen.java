@@ -82,7 +82,7 @@ public class GameScreen{
 	
 	/**
 	 * controls the start screen
-	 * @param Graphics g
+	 * @param g graphics
 	 */
 	public void startScreen(Graphics g) {
 		/**
@@ -139,7 +139,7 @@ public class GameScreen{
 
 	/**
 	 * controls the pause screen
-	 * @param Graphics g
+	 * @param g graphics
 	 */
 	public void pauseScreen(Graphics g) {
 		g.drawImage(Render.getPauseQuit(),0,0,Game.WIDTH-5,Game.HEIGHT-30, null);

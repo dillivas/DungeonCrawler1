@@ -139,119 +139,127 @@ public class Render {
 	}
 	
 	/**
-	 * @return the invinciblePotion
+	 * @return invinciblePotion
 	 */
 	public static BufferedImage getInvinciblePotion() {
 		return invinciblePotion;
 	}
 	
 	/**
-	 * @param invinciblePotion the invinciblePotion to set
+	 * the invinciblePotion to set
+	 * @param invinciblePotion potion 
 	 */
-	public static void setInvinciblePotion(BufferedImage healthPotion) {
-		Render.invinciblePotion = healthPotion;
+	public static void setInvinciblePotion(BufferedImage invinciblePotion) {
+		Render.invinciblePotion = invinciblePotion;
 	}
 	
 	/**
-	 * @return the manaPotion
+	 * @return manaPotion
 	 */
 	public static BufferedImage getManaPotion() {
 		return manaPotion;
 	}
 	
 	/**
-	 * @param manaPotion the manaPotion to set
+	 * the manaPotion to set
+	 * @param manaPotion potion
 	 */
-	public static void setManaPotion(BufferedImage healthPotion) {
-		Render.manaPotion = healthPotion;
+	public static void setManaPotion(BufferedImage manaPotion) {
+		Render.manaPotion = manaPotion;
 	}
 	
 	/**
-	 * @return the playerStop
+	 * @return playerStop
 	 */
 	public static BufferedImage getPlayerStop() {
 		return playerStop;
 	}
 
 	/**
-	 * @param playerStop the playerStop to set
+	 * the playerStop to set
+	 * @param playerStop location
 	 */
 	public static void setPlayerStop(BufferedImage playerStop) {
 		Render.playerStop = playerStop;
 	}
 
 	/**
-	 * @return the playerUp
+	 * @return playerUp
 	 */
 	public static BufferedImage getPlayerUp() {
 		return playerUp;
 	}
 
 	/**
-	 * @param playerUp the playerUp to set
+	 * the playerUp to set
+	 * @param playerUp location
 	 */
 	public static void setPlayerUp(BufferedImage playerUp) {
 		Render.playerUp = playerUp;
 	}
 
 	/**
-	 * @return the playerDown
+	 * @return playerDown
 	 */
 	public static BufferedImage getPlayerDown() {
 		return playerDown;
 	}
 
 	/**
-	 * @param playerDown the playerDown to set
+	 * the playerDown to set
+	 * @param playerDown location
 	 */
 	public static void setPlayerDown(BufferedImage playerDown) {
 		Render.playerDown = playerDown;
 	}
 
 	/**
-	 * @return the playerLeft
+	 * @return playerLeft
 	 */
 	public static BufferedImage getPlayerLeft() {
 		return playerLeft;
 	}
 
 	/**
-	 * @param playerLeft the playerLeft to set
+	 * the playerLeft to set
+	 * @param playerLeft location
 	 */
 	public static void setPlayerLeft(BufferedImage playerLeft) {
 		Render.playerLeft = playerLeft;
 	}
 
 	/**
-	 * @return the playerRight
+	 * @return playerRight
 	 */
 	public static BufferedImage getPlayerRight() {
 		return playerRight;
 	}
 
 	/**
-	 * @param playerRight the playerRight to set
+	 * the playerRight to set
+	 * @param playerRight location
 	 */
 	public static void setPlayerRight(BufferedImage playerRight) {
 		Render.playerRight = playerRight;
 	}
 
 	/**
-	 * @return the playerRightStanding
+	 * @return playerRightStanding
 	 */
 	public static BufferedImage getPlayerRightStanding() {
 		return playerRightStanding;
 	}
 
 	/**
-	 * @param playerRightStanding the playerRightStanding to set
+	 * the playerRightStanding to set
+	 * @param playerRightStanding location
 	 */
 	public static void setPlayerRightStanding(BufferedImage playerRightStanding) {
 		Render.playerRightStanding = playerRightStanding;
 	}
 
 	/**
-	 * @return the playerLeftStanding
+	 * @return playerLeftStanding
 	 */
 	public static BufferedImage getPlayerLeftStanding() {
 		return playerLeftStanding;
@@ -265,7 +273,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the playerDownStanding
+	 * @return playerDownStanding
 	 */
 	public static BufferedImage getPlayerDownStanding() {
 		return playerDownStanding;
@@ -279,7 +287,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the playerUpStanding
+	 * @return playerUpStanding
 	 */
 	public static BufferedImage getPlayerUpStanding() {
 		return playerUpStanding;
@@ -293,7 +301,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the playerRightWalk1
+	 * @return playerRightWalk1
 	 */
 	public static BufferedImage getPlayerRightWalk1() {
 		return playerRightWalk1;
@@ -307,7 +315,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the playerRightWalk2
+	 * @return playerRightWalk2
 	 */
 	public static BufferedImage getPlayerRightWalk2() {
 		return playerRightWalk2;
@@ -321,7 +329,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the playerLeftWalk1
+	 * @return playerLeftWalk1
 	 */
 	public static BufferedImage getPlayerLeftWalk1() {
 		return playerLeftWalk1;
@@ -335,7 +343,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the playerLeftWalk2
+	 * @return playerLeftWalk2
 	 */
 	public static BufferedImage getPlayerLeftWalk2() {
 		return playerLeftWalk2;
@@ -349,7 +357,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the playerForwardWalk1
+	 * @return playerForwardWalk1
 	 */
 	public static BufferedImage getPlayerForwardWalk1() {
 		return playerForwardWalk1;
@@ -363,7 +371,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the playerForwardWalk2
+	 * @return playerForwardWalk2
 	 */
 	public static BufferedImage getPlayerForwardWalk2() {
 		return playerForwardWalk2;
@@ -377,7 +385,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the playerDownWalk1
+	 * @return playerDownWalk1
 	 */
 	public static BufferedImage getPlayerDownWalk1() {
 		return playerDownWalk1;
@@ -391,7 +399,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the playerDownWalk2
+	 * @return playerDownWalk2
 	 */
 	public static BufferedImage getPlayerDownWalk2() {
 		return playerDownWalk2;
@@ -405,7 +413,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the enemyImage
+	 * @return enemyImage
 	 */
 	public static BufferedImage getEnemyImage() {
 		return enemyImage;
@@ -419,7 +427,7 @@ public class Render {
 	}
 
 	/**
-	 * @return the ghostImage
+	 * @return ghostImage
 	 */
 	public static BufferedImage getGhostImage() {
 		return ghostImage;
@@ -469,7 +477,7 @@ public class Render {
 	}
 
 	/**
-	 * @param pauseScreen the pauseScreen to set
+	 * @param instructions the instructions to set
 	 */
 	public static void setInstructions(BufferedImage instructions) {
 		Render.instructions = instructions;
@@ -540,7 +548,7 @@ public class Render {
 	}
 
 	/**
-	 * @param gameQuit the gameQuit to set
+	 * @param winRestart the winRestart to set
 	 */
 	public static void setWinRestart(BufferedImage winRestart) {
 		Render.winRestart = winRestart;

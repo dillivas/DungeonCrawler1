@@ -50,6 +50,8 @@ public class Player extends GameObject {
 	 * @param id of player object
 	 * @param ss spread sheet
 	 * @param handler handler for object use
+	 * @param dungeon map
+	 * @param game game
 	 */
 	public Player(int x, int y, ID id, SpriteSheet ss, Handler handler,Dungeon dungeon, Game game) {
 		super(x, y, id, ss);

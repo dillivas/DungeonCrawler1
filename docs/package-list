@@ -5,7 +5,9 @@ game.hud
 game.map
 game.objects
 game.objects.attack
+game.objects.bossAttack
 game.objects.enemy
+game.objects.items
 game.objects.player
 game.objects.structure
 game.render

@@ -93,7 +93,7 @@ public class Items extends GameObject{
 
 	/**
 	 * loads the item's images
-	 * @param SpriteSheet ss
+	 * @param ss SpriteSheet 
 	 */
 	public static void loadImage(SpriteSheet ss) {
 		healthPotion = ss.grabImage(7,1,32,32);
@@ -103,7 +103,8 @@ public class Items extends GameObject{
 
 	/**
 	 * gets the item image related to variable
-	 * @param String s
+	 * @param s String 
+	 * @return null or specific value
 	 */
 	public static BufferedImage getImage(String s) {
 		if (s .equals("healthPotion")) {
@@ -121,7 +122,8 @@ public class Items extends GameObject{
 	}
 	/**
 	 * gets the item image related to variable
-	 * @param String s
+	 * @param s String
+	 * @return null or specific value
 	 */
 	public static String getString(String s) {
 		if (s .equals("healthPotion")) {

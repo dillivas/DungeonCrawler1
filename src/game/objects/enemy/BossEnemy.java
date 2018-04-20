@@ -96,6 +96,7 @@ public class BossEnemy extends GameObject {
 
 	/**
 	 * render enemy image
+	 * @param g graphics
 	 */
 	@Override
 	public void render(Graphics g) {
@@ -104,6 +105,7 @@ public class BossEnemy extends GameObject {
 
 	/**
 	 * Add enemy hitbox
+	 * @return Rectangle
 	 */
 	@Override
 	public Rectangle getBounds() {
@@ -119,13 +121,14 @@ public class BossEnemy extends GameObject {
 	}
 	/**
 	 * sets the key boolean
-	 * @param boolean b
+	 * @param b boolean
 	 */
 	public static void setDead(boolean b) {
 		dead = b;
 	}
 	/**
 	 * gets the key stat
+	 * @return dead
 	 */
 	public static boolean getDead() {
 		return dead;

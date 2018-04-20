@@ -41,6 +41,7 @@ public class Key extends GameObject{
 
 	/**
 	 * render object image
+	 * @param g graphics
 	 */
 	@Override
 	public void render(Graphics g) {
@@ -48,7 +49,8 @@ public class Key extends GameObject{
 	}
 	/**
 	 * gets the item image related to variable
-	 * @param String s
+	 * @param s string
+	 * @return key
 	 */
 	public static BufferedImage getImage(String s) {
 		if (s.equals("key")) {
@@ -59,6 +61,7 @@ public class Key extends GameObject{
 
 	/**
 	 * get object hitbox
+	 * @return Rectangle
 	 */
 	@Override
 	public Rectangle getBounds() {

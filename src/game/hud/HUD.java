@@ -22,12 +22,16 @@ public class HUD {
 	private static int mana = 100;
 	private Player player;
 	/**
-	 * @return the health
+	 * Controls the player's health
+	 * @param player health
 	 */
 	
 	public HUD(Player player) {
 		this.player = player;
 	}
+	/**
+	 * @return the health
+	 */
 	public static int getHealth() {
 		return health;
 	}

@@ -119,7 +119,7 @@ public class Dungeon {
 
 		/**
 		 * Return if the player has left the dungeon room.
-		 * @return
+		 * @return leftRoom
 		 */
 		public boolean getLeftRoom() {
 			return leftRoom;
@@ -127,7 +127,7 @@ public class Dungeon {
 
 		/**
 		 * Return if the player has left the dungeon room.
-		 * @param leftRoom
+		 * @param leftRoom for the room location
 		 */
 		public void setLeftRoom(boolean leftRoom) {
 			this.leftRoom = leftRoom;

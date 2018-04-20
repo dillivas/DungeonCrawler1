@@ -31,7 +31,7 @@ public class ItemSpecs extends Items {
 	
 	/**
 	 * pairs the item with the correct image
-	 * @param String s
+	 * @param s String
 	 */
 	public static void getSpecs(String s) {
 		if (s.equals("healthPotion")) {
@@ -64,13 +64,14 @@ public class ItemSpecs extends Items {
 	}
 	/**
 	 * sets the invincible boolean
-	 * @param boolean b
+	 * @param b boolean
 	 */
 	public static void setInvincible(boolean b) {
 		invincible = b;
 	}
 	/**
 	 * sets the health
+	 * @return invincible
 	 */
 	public static boolean getInvincible() {
 		return invincible;
